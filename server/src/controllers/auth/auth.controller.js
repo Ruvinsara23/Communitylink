@@ -3,14 +3,14 @@ const User = require('../../models/auth/user.model')
 
 
 exports.registerUser = async (req, res) => {
-  const { email, password, name, profilePicture, authProvider } = req.body;
+  const { email, password, displayName, profilePicture, authProvider } = req.body;
 
   try {
-    const user = await auth.createUser({name, email, password });
+    const user = await auth.createUser({displayName, email, password });
 
     const newUser = new User({
         firebaseUID: user.uid,
-        name,
+        displayName,
         email,
         profilePicture: profilePicture || null,
         authProvider: authProvider || 'email-password',
@@ -63,7 +63,7 @@ exports.loginUser = async (req, res) => {
   
     try {
 
-      const user = await auth.getUserByEmail(email);
+      const user = await auth.getUserByEmail(email,password);
 
       res.status(200).json({
         message: 'User logged in successfully!',
