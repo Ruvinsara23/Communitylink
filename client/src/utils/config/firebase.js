@@ -2,8 +2,10 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
+
+
 const firebaseConfig = {
-  apiKey: "AIzaSyC3ygyhVl1e5m1HQ39ikckrfwGYXMN1OPs",
+  apiKey:  import.meta.env.VITE_FIREBASEAPI,
   authDomain: "communitylink-176f1.firebaseapp.com",
   projectId: "communitylink-176f1",
   storageBucket: "communitylink-176f1.firebasestorage.app",
