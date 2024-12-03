@@ -76,3 +76,46 @@ exports.loginUser = async (req, res) => {
       });
     }
   };
+
+
+
+
+  exports.registergoogleuser = async(req,res)=>{
+    const {firebaseUID,displayName,email,profilePicture,authProvider}=req.body
+
+    try{
+
+      const newUser = new User({
+        firebaseUID,
+        displayName,
+        email,
+        profilePicture: profilePicture || null,
+        authProvider: authProvider || 'email-password',
+    
+      });
+      
+      await newUser.save();
+      res.status(200).json({
+        message:"user check cretae successfully"
+
+      })
+
+      console.log("user sved successfully in mongodb",newUser);
+
+    }catch(error){
+      console.log("user saving Error in mongodb",error);
+      res.status(400).json({
+        message:"error",
+        error:error.message
+      })
+      
+      
+    }
+
+    
+  
+
+  
+
+
+  }
