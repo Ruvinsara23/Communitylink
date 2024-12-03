@@ -14,6 +14,26 @@ const userSchema = new mongoose.Schema({
    { type: String, 
     required: true, 
     unique: true },
+  
+createdCommunities: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Community', 
+    },
+  ],
+  
+  joinedCommunities: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Community',
+    },
+  ],
+
+  role: {
+    type: String,
+    enum: ['admin', 'member'], 
+    default: 'member',},
+
 
   profilePicture:
    { type: String }, 
