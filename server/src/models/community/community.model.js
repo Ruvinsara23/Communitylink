@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { v4: uuidv4 } = require('uuid'); // Optional: For fallback uniqueness
+const { v4: uuidv4 } = require('uuid'); 
 
 const communitySchema = new mongoose.Schema({
   name: {
@@ -10,6 +10,11 @@ const communitySchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  communityImage:{
+    type: String, 
+    default: '',
+  },
+  
   bannerImage: {
     type: String, 
     default: '',
