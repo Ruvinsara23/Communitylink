@@ -1,0 +1,110 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
+import axios from 'axios'
+import '../../App.css'
+
+
+
+const defultFormfield={
+    name:'',
+    description:''
+
+}
+
+const CreateCommunityForm = () => {
+  const [formField,setFormField]=useState(defultFormfield);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const {name,description }=formField;
+  const [isFocused, setIsFocused] = useState(false);
+  const navigate = useNavigate();
+
+
+    const resetFormFeild=()=>setFormField(defultFormfield);
+   
+const handleChange=(event)=>{
+    const {name,value}=event.target;
+    setFormField({...formField,[name]:value})
+
+}
+
+  const handleSubmit =async  (e) => {
+    e.preventDefault()
+    navigate('/setup-comunity');
+// try{
+//     const response=await axios.post('http://localhost:8000/api/community/create-community',{
+//         name:name,
+//         description:description,
+//         bannerImage:'',
+//         createdBy:'674b8fa06060947df883f105'
+
+//     })
+
+//      if(response.status===200){
+//       resetFormFeild();
+//       setFormSubmitted(true)
+//      }
+//      console.log("community created successfully",response);
+     
+
+// }catch(error){
+
+//     console.log("Error In Post request In Community creation ",error)
+
+// }
+
+//     console.log('Community Name:', name)
+//     console.log('Community Description:', description)
+ 
+//     resetFormFeild()
+//     setFormSubmitted(true)
+  }
+
+
+
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="space-y-2">
+      <Label htmlFor="Add name for your community" className="text-2xl font-semibold">Name For your community </Label>
+    
+      <Input
+        id="community-name"
+        placeholder="Enter your community name"
+        value={name}
+        name='name'
+        onChange={handleChange}
+        required
+        className="border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-500" 
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+      
+      />
+     
+     
+    </div>
+    <div className="space-y-2">
+      <Label htmlFor="community-description" className="text-2xl font-semibold">Describe About Your Community</Label>
+      <Textarea
+        id="community-description"
+        placeholder="Describe your community"
+        value={description}
+        name='description'
+        onChange={handleChange}
+        required
+        
+      />
+    </div>
+    <div className="flex justify-end">
+      <Button type="submit" className="w-auto px-6">Create Community</Button>
+     
+    </div>
+  </form>
+
+  )
+}
+
+export default CreateCommunityForm
