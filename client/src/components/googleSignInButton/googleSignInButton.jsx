@@ -74,16 +74,16 @@ const handleGoogleSignOut=async()=>{
     }
 }
 
-
+// 
   return (
     <div>
     <Button type="submit" variant="outline" className="w-full" onClick={handleGooglelogin}   disabled={isLoading}>
     {isLoading ? "Signing in..." : "Sign in with Google"}
     </Button>
+    
     <Button type="submit" variant="outline" className="w-full" onClick={handleGoogleSignOut}   disabled={isLoading}>
-SignOut
+    SignOut
     </Button>
-
     </div>
     
   )

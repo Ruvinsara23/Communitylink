@@ -1,13 +1,15 @@
 import  { useState } from "react";
 import axios from "axios";
-import Profile from '../../assets/profile.jpeg'
+import Logo from '../../assets/logo.jpg'
 import Cover from '../../assets/cover.jpg'
+
 
 function ProfilePreview() {
     const [coverImage, setCoverImage] = useState("/placeholder.svg?height=250&width=400");
     const [profileImage, setProfileImage] = useState("/placeholder.svg?height=100&width=100");
     const [coverImageFile, setCoverImageFile] = useState(null);
     const [profileImageFile, setProfileImageFile] = useState(null);
+
 
     const handleFileChange = (event, imageType) => {
         const file = event.target.files?.[0];
@@ -54,11 +56,11 @@ function ProfilePreview() {
 
     return (
         <div className="max-w-md mx-auto p-4">
-            <div className="relative w-full h-48">
+            <div className="relative w-full ">
                 <img
                     src={Cover}
                     alt="Community banner"
-                    className="object-cover bg-red-500"
+                    className="object-cover bg-red-500  h-100"
                 />
                 <label className="absolute w-auto inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity cursor-pointer">
                     <input 
@@ -74,7 +76,7 @@ function ProfilePreview() {
             <div className="relative -mt-12 flex justify-center">
                 <div className="rounded-2xl bg-white p-2 shadow-lg">
                     <img
-                        src={Profile}
+                        src={Logo}
                         alt="Profile avatar"
                         width={80}
                         height={80}
@@ -100,7 +102,7 @@ function ProfilePreview() {
 
                 <button
                     onClick={handleSubmit}
-                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+                    className="mt-4 bg-black text-white px-4 py-2 rounded-lg hover:bg-black transition"
                 >
                     Submit
                 </button>

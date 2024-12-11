@@ -27,7 +27,7 @@ const SetuCommunity = () => {
       <div className="flex gap-2">
         <Input
           id="community-url"
-          value={communityUrl}
+          value='http://localhost:5173/community/dolpenguin'
           onChange={(e) => setCommunityUrl(e.target.value)}
           disabled={!isEditing}
           className="flex-grow"

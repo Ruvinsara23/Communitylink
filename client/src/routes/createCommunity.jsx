@@ -1,6 +1,6 @@
 import CreateCommunityForm from "../components/createCommunityForm/createCommunityForm"
 
-import Login from '../assets/login.svg'
+import Login from '../assets/communitysetup.jpg'
 import { Outlet } from "react-router"
 
 export const CreateCommunity = () => {
