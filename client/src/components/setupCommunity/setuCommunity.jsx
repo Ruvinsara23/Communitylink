@@ -11,6 +11,7 @@ const url={
 }
 
 const SetuCommunity = () => {
+    // eslint-disable-next-line no-unused-vars
     const [communityUrl, setCommunityUrl] = useState(url)
     const [isEditing, setIsEditing] = useState(false)
 
@@ -27,7 +28,7 @@ const SetuCommunity = () => {
       <div className="flex gap-2">
         <Input
           id="community-url"
-          value='http://localhost:5173/community/dolpenguin'
+          value='http://localhost:5173/community/test-community'
           onChange={(e) => setCommunityUrl(e.target.value)}
           disabled={!isEditing}
           className="flex-grow"

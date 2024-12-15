@@ -3,10 +3,13 @@ import SignUpPage from "../components/signUpPage/signUpPage"
 
 
 export const Auth= () => {
+
+   // <SignUpPage />
   return (
-    <div>
+    <div className=" ">
+   
     <SignInPage />
-    <SignUpPage />
+    
     </div>
   )
 }

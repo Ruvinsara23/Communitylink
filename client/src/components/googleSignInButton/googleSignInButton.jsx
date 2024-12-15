@@ -73,7 +73,9 @@ const handleGoogleSignOut=async()=>{
       console.log("Error in signOut",error);
     }
 }
-
+<Button type="submit" variant="outline" className="w-full" onClick={handleGoogleSignOut}   disabled={isLoading}>
+SignOut
+</Button>
 // 
   return (
     <div>
@@ -81,9 +83,7 @@ const handleGoogleSignOut=async()=>{
     {isLoading ? "Signing in..." : "Sign in with Google"}
     </Button>
     
-    <Button type="submit" variant="outline" className="w-full" onClick={handleGoogleSignOut}   disabled={isLoading}>
-    SignOut
-    </Button>
+   
     </div>
     
   )

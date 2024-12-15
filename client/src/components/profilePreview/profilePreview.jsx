@@ -5,7 +5,9 @@ import Cover from '../../assets/cover.jpg'
 
 
 function ProfilePreview() {
+    // eslint-disable-next-line no-unused-vars
     const [coverImage, setCoverImage] = useState("/placeholder.svg?height=250&width=400");
+    // eslint-disable-next-line no-unused-vars
     const [profileImage, setProfileImage] = useState("/placeholder.svg?height=100&width=100");
     const [coverImageFile, setCoverImageFile] = useState(null);
     const [profileImageFile, setProfileImageFile] = useState(null);
@@ -96,8 +98,8 @@ function ProfilePreview() {
 
             <div className="p-6 text-center space-y-6">
                 <div className="space-y-1">
-                    <h1 className="text-2xl font-bold tracking-tight">Dollpenguin</h1>
-                    <p className="text-muted-foreground">By Nimash Sahan</p>
+                    <h1 className="text-2xl font-bold tracking-tight">Test Community </h1>
+                    <p className="text-muted-foreground">By Test User</p>
                 </div>
 
                 <button

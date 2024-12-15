@@ -19,8 +19,8 @@ function App() {
     <Routes>
     <Route path='/auth' element={<Auth/>} />
     <Route path='/create-community' element={<CreateCommunity />}/>
-    <Route path='/setup-comunity' element={<SetUpCommunity />}/>
-    <Route path='/community' element={<CommunityHomePage />} />
+    <Route path='/setup-community' element={<SetUpCommunity />}/>
+    <Route path='/community/test-community' element={<CommunityHomePage />} />
     </Routes>
    
   )

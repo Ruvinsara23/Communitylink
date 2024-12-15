@@ -16,7 +16,7 @@ const defultFormfield={
 
 }
 
-const CreateCommunityForm = () => {
+const  CreateCommunityForm = () => {
   const [formField,setFormField]=useState(defultFormfield);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const {name,description }=formField;
@@ -34,34 +34,36 @@ const handleChange=(event)=>{
 
   const handleSubmit =async  (e) => {
     e.preventDefault()
-    navigate('/setup-comunity');
-// try{
-//     const response=await axios.post('http://localhost:8000/api/community/create-community',{
-//         name:name,
-//         description:description,
-//         bannerImage:'',
-//         createdBy:'674b8fa06060947df883f105'
+   
+try{
+    const response=await axios.post('http://localhost:8000/api/community/create-community',{
+        name:name,
+        description:description,
+        bannerImage:'',
+        createdBy:'674b8fa06060947df883f105'
 
-//     })
+    })
 
-//      if(response.status===200){
-//       resetFormFeild();
-//       setFormSubmitted(true)
-//      }
-//      console.log("community created successfully",response);
+     if(response.status===200){
+      resetFormFeild();
+      setFormSubmitted(true);
+      navigate('/setup-community');
+     }
+     console.log("community created successfully",response);
      
 
-// }catch(error){
+}catch(error){
 
-//     console.log("Error In Post request In Community creation ",error)
+    console.log("Error In Post request In Community creation ",error)
 
-// }
+}
 
-//     console.log('Community Name:', name)
-//     console.log('Community Description:', description)
+    // console.log('Community Name:', name)
+    // console.log('Community Description:', description)
  
-//     resetFormFeild()
-//     setFormSubmitted(true)
+    // resetFormFeild()
+    // setFormSubmitted(true)
+    
   }
 
 

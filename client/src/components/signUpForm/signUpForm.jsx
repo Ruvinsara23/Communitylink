@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import GoogleSignInButton from '../googleSignInButton/googleSignInButton'
+// import GoogleSignInButton from '../googleSignInButton/googleSignInButton'
 
 
 const defaultFormField={
@@ -58,7 +58,7 @@ const SignUpForm = () => {
       }
     
 
-
+      // <GoogleSignInButton />
   return (
     <div>
     <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-md">
@@ -101,11 +101,11 @@ const SignUpForm = () => {
       </div>
       <div className="relative flex justify-center text-xs uppercase">
         <span className="bg-background px-2 text-muted-foreground">
-          Or continue with
+          
         </span>
       </div>
     </div>
-    <GoogleSignInButton />
+  
   </form>
     </div>
   )
