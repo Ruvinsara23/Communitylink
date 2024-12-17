@@ -77,7 +77,7 @@ const SignInForm = () => {
       />
     </div>
     {passwordError && <p className="text-red-500">{passwordError}</p>}
-    <Button type="submit" className="w-full">Sign In</Button>
+    <Button type="submit" className="w-full bg-blue-700 text-white hover:bg-blue-600 focus-visible:ring-blue-500" >Sign In</Button>
     {""?.message && <p className="text-green-500">{"".message}</p>}
     <div className="relative">
       <div className="absolute inset-0 flex items-center">
@@ -85,7 +85,9 @@ const SignInForm = () => {
       </div>
       <div className="relative flex justify-center text-xs uppercase">
         <span className="bg-background px-2 text-muted-foreground">
+        <div className="w-full text-blue-900 via-purple-900">
           Or continue with
+          </div>
         </span>
       </div>
     </div>
