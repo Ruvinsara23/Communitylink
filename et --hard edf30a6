@@ -1,0 +1,23 @@
+[33m2c473eb[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{0}: reset: moving to HEAD~1
+[33mce9004b[m[33m ([m[1;31morigin/main[m[33m)[m HEAD@{1}: reset: moving to HEAD~1
+[33m415a3dd[m[33m ([m[1;31morigin/auth[m[33m)[m HEAD@{2}: reset: moving to HEAD~1
+[33mb6a00e2[m HEAD@{3}: reset: moving to HEAD~1
+[33m613bd19[m HEAD@{4}: reset: moving to HEAD~1
+[33m78c3563[m HEAD@{5}: reset: moving to HEAD~1
+[33m33f254b[m HEAD@{6}: commit (amend): Update to use Firebase credentials from environment variables
+[33medf30a6[m HEAD@{7}: commit: Update to use Firebase credentials from environment variables
+[33m78c3563[m HEAD@{8}: merge auth: Merge made by the 'ort' strategy.
+[33m613bd19[m HEAD@{9}: commit (amend): add .env
+[33m00ee1f7[m[33m ([m[1;32mauth[m[33m)[m HEAD@{10}: merge auth: Fast-forward
+[33mb6a00e2[m HEAD@{11}: checkout: moving from auth to main
+[33m00ee1f7[m[33m ([m[1;32mauth[m[33m)[m HEAD@{12}: commit: add .env
+[33mb6a00e2[m HEAD@{13}: checkout: moving from main to auth
+[33mb6a00e2[m HEAD@{14}: merge auth: Fast-forward
+[33mce9004b[m[33m ([m[1;31morigin/main[m[33m)[m HEAD@{15}: checkout: moving from auth to main
+[33mb6a00e2[m HEAD@{16}: commit: creat signIn signUp with firebase
+[33m415a3dd[m[33m ([m[1;31morigin/auth[m[33m)[m HEAD@{17}: checkout: moving from auth to auth
+[33m415a3dd[m[33m ([m[1;31morigin/auth[m[33m)[m HEAD@{18}: commit: create user regestration with firebase
+[33mce9004b[m[33m ([m[1;31morigin/main[m[33m)[m HEAD@{19}: checkout: moving from main to auth
+[33mce9004b[m[33m ([m[1;31morigin/main[m[33m)[m HEAD@{20}: merge master: Merge made by the 'ort' strategy.
+[33m2c473eb[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{21}: checkout: moving from master to main
+[33m6559459[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{22}: commit (initial): project setup
