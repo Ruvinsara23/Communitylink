@@ -9,7 +9,7 @@ exports.createCommunity=async(req,res)=>{
         name:name,
         description:description,
         bannerImage:bannerImage||'null',
-        createdBy:createdBy
+        createdBy:createdBy || 'null'
 
     })
 
@@ -176,3 +176,30 @@ exports.addMember = async (req, res) => {
     }
   };
   
+  exports.uploadCommunityImages = async (req, res) => {
+    try {
+        const { communityId } = req.params;
+        const community = await Community.findById(communityId);
+
+        if (!community) {
+            return res.status(404).json({ error: "Community not found" });
+        }
+
+        const communityImage = req.files?.communityImage?.[0]?.buffer.toString("base64") || community.communityImage;
+        const bannerImage = req.files?.bannerImage?.[0]?.buffer.toString("base64") || community.bannerImage;
+
+        community.communityImage = communityImage;
+        community.bannerImage = bannerImage;
+
+        await community.save();
+
+        res.status(200).json({
+            message: "Images updated successfully",
+            communityImage,
+            bannerImage,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Failed to update community images" });
+    }
+};
