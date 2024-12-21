@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label"
 import GoogleSignInButton from '../googleSignInButton/googleSignInButton'
 import {signInWithEmailAndPassword } from 'firebase/auth'
 import {auth} from '../../utils/config/firebase.js'
+import { useNavigate } from 'react-router'
 
 
 
@@ -20,6 +21,7 @@ const SignInForm = () => {
     const [formField,setFormField]=useState(defaultFormField)
     const {email,password}=formField
     const [passwordError, setPasswordError] = useState("")
+    const navigate=useNavigate()
 
     const resetFormFeild=()=>setFormField(defaultFormField)
 
@@ -38,6 +40,7 @@ const SignInForm = () => {
             //     password:password,
 
             // })
+
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const userData = await userCredential.user
         console.log("this is user",userData)
@@ -47,6 +50,9 @@ const SignInForm = () => {
             }else{
                 console.log("Login request 200", userCredential.data)
                 resetFormFeild()
+                navigate('/create-community');
+                console.log("navgate successfully");
+
             }
 
         }catch(error){
