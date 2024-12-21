@@ -44,7 +44,7 @@ export const CommunityHomePage=()=> {
 
   return (
     <Layout>
-      <h1 className="text-3xl font-bold  mt-4 mb">Community Feed</h1>
+      <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r  from-pink-600 via-yellow-300 to back">Welcome</h1>
       <CreatePost />
       <PostList
         posts={dummyPosts}
