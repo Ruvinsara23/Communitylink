@@ -57,7 +57,8 @@ function ProfilePreview() {
     };
 
     return (
-        <div className="max-w-md mx-auto p-4">
+       
+        <div className="max-w-md mx-auto p-4 ">
             <div className="relative w-full ">
                 <img
                     src={Cover}
@@ -98,18 +99,19 @@ function ProfilePreview() {
 
             <div className="p-6 text-center space-y-6">
                 <div className="space-y-1">
-                    <h1 className="text-2xl font-bold tracking-tight">Test Community </h1>
-                    <p className="text-muted-foreground">By Test User</p>
+                    <h1 className="text-2xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-700  to-blue-600">Test Community </h1>
+                    <p className="text-muted-foreground text-black ">By Test User</p>
                 </div>
 
                 <button
                     onClick={handleSubmit}
-                    className="mt-4 bg-black text-white px-4 py-2 rounded-lg hover:bg-black transition"
+                    className="mt-4 bg-purple-700 text-white px-6 py-2 font-medium rounded hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-white-500 "
                 >
                     Submit
                 </button>
             </div>
         </div>
+        
     );
 }
 

@@ -70,7 +70,8 @@ try{
 
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    
+    <form onSubmit={handleSubmit} className="space-y-6 text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-blue-600 to-black">
     <div className="space-y-2">
       <Label htmlFor="Add name for your community" className="text-2xl font-semibold">Name For your community </Label>
     
@@ -89,7 +90,7 @@ try{
      
      
     </div>
-    <div className="space-y-2">
+    <div className="space-y-2 ">
       <Label htmlFor="community-description" className="text-2xl font-semibold">Describe About Your Community</Label>
       <Textarea
         id="community-description"
@@ -101,10 +102,13 @@ try{
         
       />
     </div>
-    <div className="flex justify-end">
-      <Button type="submit" className="w-auto px-6">Create Community</Button>
-     
-    </div>
+    <div className="flex justify-end mt-4 ">
+  <Button
+    type="submit" className="px-6 py-2 bg-purple-700 text-white font-medium rounded hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-white:500">
+    Create Community
+  </Button>
+</div>
+
   </form>
 
   )

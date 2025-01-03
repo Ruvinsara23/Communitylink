@@ -79,10 +79,11 @@ const CreatePost = () => {
           </label>
           {image && <span className="ml-2 text-sm text-gray-500">{image.name}</span>}
         </div>
-        <Button type="submit">
-          <Send className="h-4 w-4 mr-2" />
-          Post
-        </Button>
+        
+        <Button type="submit" className="bg-blue-700 text-white font-bold px-4 py-2 rounded-md hover:bg-indigo-700 hover:text-white transition-colors">
+  <Send className="h-4 w-4 mr-2" />
+  Post
+</Button>
       </div>
     </form>
   );

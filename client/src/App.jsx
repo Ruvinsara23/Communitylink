@@ -5,16 +5,18 @@ import { CreateCommunity } from './routes/createCommunity';
 import { SetUpCommunity } from './routes/setupComminity';
 import {CommunityHomePage} from './routes/communityHomePage';
 import './index.css'
+import SignUpPage from './components/signUpPage/signUpPage';
+
 
 
 
 function App() {
  
   
-  // <SignInPage />
-  // <SignUpPage />
-  //
-  // <SetuCommunity />
+   //<SignInPage />
+   <SignUpPage />
+  
+  //<SetuCommunity />
   return (
     <Routes>
     <Route path='/auth' element={<Auth/>} />
