@@ -4,11 +4,27 @@ const authRoutes = require("./routes/api/auth/auth.router");
 const communityRouter = require("./routes/api/community/community.router")
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const multer = require("multer");
-
+const io = require('socket.io');
 
 require('dotenv').config()
 const cors = require("cors");
+io.on('connection', (socket) => {
+  console.log('A user connected:', socket.id);
 
+  socket.on('joinRoom', (chatID) => {
+    socket.join(chatID);
+    console.log(`User joined room: ${chatID}`);
+  });
+
+  socket.on('sendMessage', (data) => {
+    const { chatID, message } = data;
+    io.to(chatID).emit('receiveMessage', message);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('A user disconnected:', socket.id);
+  });
+});
 const app = express()
 const PORT = process.env.PORT ||5000
 
