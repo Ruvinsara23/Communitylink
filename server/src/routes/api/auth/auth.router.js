@@ -8,4 +8,7 @@ router.post('/register', registerUser);
 router.post('/verify-token', verifyToken);
 router.post('/login',loginUser);
 
-module.exports = router;0
+module.exports = router;
+
+
+// both memeber and community sceama has members and join community fields

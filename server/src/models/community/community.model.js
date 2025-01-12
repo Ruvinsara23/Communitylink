@@ -97,3 +97,4 @@ communitySchema.pre('validate', async function (next) {
 });
 
 module.exports = mongoose.model('Community', communitySchema);
+// both memeber and community sceama has members and join community fields

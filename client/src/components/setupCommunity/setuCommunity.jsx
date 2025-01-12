@@ -4,19 +4,33 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-
+import { useNavigate } from "react-router"
 
 const url={
     intialUrl:''
 }
 
+
+
 const SetuCommunity = () => {
     // eslint-disable-next-line no-unused-vars
     const [communityUrl, setCommunityUrl] = useState(url)
     const [isEditing, setIsEditing] = useState(false)
+    const navigate = useNavigate()
 
     const handleSave = () => {
         setIsEditing(false)
+      }
+    
+      const handleSubmit=()=>{
+
+        try{
+          navigate('/community-home');
+          // const response=axios.post('http://localhost:8000/api/community/create-community',{})
+          //  console.log(response)
+        }catch(error){
+          console.log("Error in sending data to server",error);
+        }
       }
 
   return (
@@ -52,7 +66,7 @@ const SetuCommunity = () => {
     </div>
      
 
-    <Button className="w-full bg-purple-700 text-white text-lg h-12 rounded-2xl hover:bg-indigo-700 transition-all ">
+    <Button type="sdubmit" onClick={handleSubmit} className="w-full bg-purple-700 text-white text-lg h-12 rounded-2xl hover:bg-indigo-700 transition-all ">
       Continue to Community Page
     </Button>
   </div>

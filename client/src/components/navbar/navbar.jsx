@@ -1,6 +1,14 @@
 import { Link } from "react-router"
+import { useNavigate } from "react-router"
 
 const Navbar = () => {
+ const navigate = useNavigate();
+
+
+ const handleNavigate=()=>{
+    navigate('/chat-room');
+ }
+
   return (
     <nav className="bg-white shadow-md px-6 py-4">
   <div className="container mx-auto flex items-center justify-between">
@@ -50,6 +58,9 @@ const Navbar = () => {
           className="text-purple-700 font-bold border-2 border-purple-300 px-4 py-2 rounded-md hover:bg-purple-100 hover:border-purple-500 transition"
         >
           About
+        </Link>
+        <Link onClick={handleNavigate} className="text-purple-700 font-bold border-2 border-purple-300 px-4 py-2 rounded-md hover:bg-purple-100 hover:border-purple-500 transition">
+        Chat Room
         </Link>
       </li>
     </ul>
