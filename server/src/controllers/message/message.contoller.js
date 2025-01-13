@@ -2,54 +2,45 @@ const Message = require('../../models/message/message.model');
 const Chat = require('../../models/chat/chat.model'); 
 
 // Create a new message
+// message.controller.js
 exports.createMessage = async (req, res) => {
     try {
-        const { chatID, senderID, content, type } = req.body;
-
-        // Validate required fields
-        if (!chatID || !senderID || !content) {
-            return res.status(400).json({ message: 'chatID, senderID, and content are required.' });
-        }
-
-        
-
-        // Create and save the message
-        const newMessage = new Message({
-            chatID,
-            senderID,
-            content,
-            type,
+      const { chatID, senderID, content } = req.body;
+  
+      // Validate required fields
+      if (!chatID || !senderID || !content) {
+        return res.status(400).json({ 
+          success: false, 
+          message: 'Missing required fields' 
         });
-
-        const savedMessage = await newMessage.save();
-
-        await Chat.findByIdAndUpdate(
-            chatID,
-            { $push: { messages: savedMessage._id }, updatedAt: new Date() },
-            { new: true }
-        );
-
-        res.status(201).json({
-            success: true,
-            message: 'Message sent successfully',
-            data: savedMessage,
-        });
-
-
-        // Optionally update the chat's last message timestamp
-        await Chat.findByIdAndUpdate(chatID, { updatedAt: new Date() });
-
-        res.status(201).json({
-            success: true,
-            message: 'Message sent successfully',
-            data: savedMessage,
-        });
+      }
+  
+      // Create new message
+      const newMessage = new Message({
+        chatID,
+        senderID,
+        content
+      });
+  
+      const savedMessage = await newMessage.save();
+  
+      // Send single response with saved message
+      return res.status(200).json({
+        success: true,
+        message: 'Message created successfully',
+        data: savedMessage
+      });
+  
     } catch (error) {
-        console.error('Error creating message:', error);
-        res.status(500).json({ success: false, message: 'Internal server error' });
+      console.error('Error creating message:', error);
+      // Send single error response
+      return res.status(500).json({
+        success: false,
+        message: 'Error creating message',
+        error: error.message
+      });
     }
-};
-
+  };
 // Fetch messages by chat ID
 exports.getMessagesByChatID = async (req, res) => {
     try {

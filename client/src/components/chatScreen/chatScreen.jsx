@@ -2,41 +2,25 @@ import { useState, useEffect } from 'react';
 import MessageInput from '../messageInput/messageInput';
 import axios from 'axios';
 
-export function ChatScreen({ groupId, onSendMessage }) {
-  const [group, setGroup] = useState(null);
-  const [messages, setMessages] = useState([]);
+export function ChatScreen({ group, messages,handleSendMessage, onCreateGroup }) {
 
-  useEffect(() => {
-    if (!groupId) return;
+  // const handleSendMessage = async (message, file) => {
+  //   // Ensure message or file is present before proceeding
+  //   if (!message && !file) return;
 
-    const fetchGroupData = async () => {
-      try {
-        const response = await axios.get(`/api/chat/6780b95300ff81739896bb37`);
-        const { group, messages } = response.data;
-        setGroup(group);
-        setMessages(messages);
-      } catch (error) {
-        console.error('Failed to fetch group data:', error);
-      }
-    };
+  //   const newMessage = {
+  //     chatID: '6780b95300ff81739896bb37', 
+  //     senderID: "674bf3a07e5eb5e5968c12db", // This should be dynamically fetched from your user/auth state
+  //     content: message || file.name || 'No content',
+  //     file: file ? { url: 'path/to/file', name: file.name } : undefined, // Adjust as needed
+  //     time: new Date().toISOString(),
+  //   };
+  
+    
+  //   onSendMessage(newMessage);
+  //   console.log('Preparing to send message...',newMessage);
+  // };
 
-    fetchGroupData();
-  }, [groupId]);
-
-  const handleSendMessage = async (content, file) => {
-    try {
-      const formData = new FormData();
-      formData.append('content', content);
-      if (file) {
-        formData.append('file', file);
-      }
-
-    //   const response = await axios.post(`/api/groups/${groupId}/messages`, formData);
-    //   setMessages((prevMessages) => [...prevMessages, response.data]);
-    } catch (error) {
-      console.error('Failed to send message:', error);
-    }
-  };
 
   if (!group) {
     return (
@@ -48,11 +32,12 @@ export function ChatScreen({ groupId, onSendMessage }) {
  
   return (
     <div className="flex-1 flex flex-col">
-      <div className="bg-white border-b p-4">
+      <div className="bg-white border-b p-4 flex justify-between items-center">
         <h2 className="text-xl font-semibold">{group.name}</h2>
+       
       </div>
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.map((message) => (
+        {Array.isArray(messages) && messages.map((message) => (
           <div key={message.id} className={`flex items-start ${message.sender === 'You' ? 'justify-end' : ''}`}>
             {message.sender !== 'You' && (
               <img
@@ -63,20 +48,32 @@ export function ChatScreen({ groupId, onSendMessage }) {
                 className="rounded-full"
               />
             )}
-            <div className={`ml-3 ${message.sender === 'You' ? 'mr-3 order-first' : ''}`}>
-              <p className="font-semibold">{message.sender}</p>
-              <div className={`p-3 rounded-lg ${message.sender === 'You' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+            <div className={`flex ${message.senderID.name === 'Pansilu' ? 'justify-end' : 'justify-start'} mb-3`}>
+            <div className={`max-w-md ${message.senderID.name === 'Pansilu' ? 'text-right' : 'text-left'}`}>
+              <p className="font-semibold">{message.senderID.name || 'unknown sender'}</p>
+              <div
+                className={`p-3 rounded-xl ${
+                  message.senderID.name === 'Pansilu'
+                    ? 'bg-green-500 text-white'
+                    : 'bg-gray-200'
+                }`}
+              >
                 <p>{message.content}</p>
                 {message.file && (
                   <div className="mt-2">
-                    <a href={message.file.url} download={message.file.name} className="text-sm underline">
+                    <a
+                      href={message.file.url}
+                      download={message.file.name}
+                      className="text-sm underline"
+                    >
                       {message.file.name}
                     </a>
                   </div>
                 )}
               </div>
-              <p className="text-xs text-gray-500 mt-1">{message.time}</p>
             </div>
+          </div>
+                   
             {message.sender === 'You' && (
               <img
                 src={message.image}
@@ -89,7 +86,8 @@ export function ChatScreen({ groupId, onSendMessage }) {
           </div>
         ))}
       </div>
-      <MessageInput onSendMessage={handleSendMessage} />
+      <MessageInput handleSendMessage={handleSendMessage} />
+
     </div>
   );
 }

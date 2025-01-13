@@ -2,19 +2,28 @@ import { useState, useRef } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Paperclip } from 'lucide-react'
-import PropTypes from 'prop-types'
 
-export default function MessageInput({ onSendMessage }) {
+export default function MessageInput({handleSendMessage}) {
   const [message, setMessage] = useState('')
   const [file, setFile] = useState(null)
   const fileInputRef = useRef(null)
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (message.trim() || file) {
-      onSendMessage(message, file)
-      setMessage('')
-      setFile(null)
+      setLoading(true)
+      try {
+        await handleSendMessage(message, file)
+        setMessage('')
+        setFile(null)
+      } catch (error) {
+        console.error("Error sending message:", error)
+      } finally {
+        setLoading(false)
+      }
+    } else {
+      console.log("Cannot send empty message and no file.")
     }
   }
 
@@ -46,10 +55,13 @@ export default function MessageInput({ onSendMessage }) {
         size="icon"
         className="mr-2"
         onClick={() => fileInputRef.current?.click()}
+        disabled={loading}
       >
         <Paperclip className="h-4 w-4" />
       </Button>
-      <Button type="submit">Send</Button>
+      <Button type="submit" disabled={loading}>
+        {loading ? "Sending..." : "Send"}
+      </Button>
       {file && (
         <p className="ml-2 text-sm text-gray-500">
           File: {file.name}
@@ -58,7 +70,50 @@ export default function MessageInput({ onSendMessage }) {
     </form>
   )
 }
+// import { useState } from 'react';
 
-MessageInput.propTypes = {
-  onSendMessage: PropTypes.func.isRequired,
-}
+// export default function MessageInput({handleSendMessage}) {
+//   const [message, setMessage] = useState('');
+//   const [file, setFile] = useState(null);
+
+//   const handleMessageChange = (event) => {
+//     setMessage(event.target.value);
+//   };
+
+//   const handleFileChange = (event) => {
+//     setFile(event.target.files[0]);
+//   };
+
+//   const handleSend = () => {
+//     if (message.trim() === '' && !file) return;
+
+//     handleSendMessage(message.trim(), file);
+//     setMessage('');
+//     setFile(null);
+//   };
+
+//   return (
+//     <div className="p-4 bg-white border-t">
+//       <div className="flex items-center">
+//         <input
+//           type="text"
+//           value={message}
+//           onChange={handleMessageChange}
+//           placeholder="Type your message..."
+//           className="flex-1 p-2 border rounded-lg"
+//         />
+//         <input
+//           type="file"
+//           onChange={handleFileChange}
+//           className="ml-2"
+//         />
+//         <button
+//           onClick={handleSend}
+//           className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg"
+//         >
+//           Send
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
