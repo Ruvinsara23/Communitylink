@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Paperclip } from 'lucide-react'
 
-export default function MessageInput({handleSendMessage}) {
+export default function MessageInput(handleSendMessage) {
   const [message, setMessage] = useState('')
   const [file, setFile] = useState(null)
   const fileInputRef = useRef(null)
@@ -70,50 +70,3 @@ export default function MessageInput({handleSendMessage}) {
     </form>
   )
 }
-// import { useState } from 'react';
-
-// export default function MessageInput({handleSendMessage}) {
-//   const [message, setMessage] = useState('');
-//   const [file, setFile] = useState(null);
-
-//   const handleMessageChange = (event) => {
-//     setMessage(event.target.value);
-//   };
-
-//   const handleFileChange = (event) => {
-//     setFile(event.target.files[0]);
-//   };
-
-//   const handleSend = () => {
-//     if (message.trim() === '' && !file) return;
-
-//     handleSendMessage(message.trim(), file);
-//     setMessage('');
-//     setFile(null);
-//   };
-
-//   return (
-//     <div className="p-4 bg-white border-t">
-//       <div className="flex items-center">
-//         <input
-//           type="text"
-//           value={message}
-//           onChange={handleMessageChange}
-//           placeholder="Type your message..."
-//           className="flex-1 p-2 border rounded-lg"
-//         />
-//         <input
-//           type="file"
-//           onChange={handleFileChange}
-//           className="ml-2"
-//         />
-//         <button
-//           onClick={handleSend}
-//           className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg"
-//         >
-//           Send
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }

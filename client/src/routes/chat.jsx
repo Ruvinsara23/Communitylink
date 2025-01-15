@@ -14,7 +14,8 @@ export default function ChatInterface() {
  
 
   useEffect(() => {
-    const ws = new WebSocket('ws://localhost:8000');
+    //websocket connection
+    const ws = new WebSocket('ws://localhost:8000');//backend url ek dapan
     setSocket(ws);
 
     ws.onopen = () => {
@@ -63,7 +64,7 @@ export default function ChatInterface() {
 
   useEffect(() => {
     if (!selectedGroup) return;
-
+//backend url ek dapan messages collection ekt adala
     async function fetchMessages() {
       try {
         const response = await fetch(`http://localhost:8000/api/chat/messages/678355d4649ed6ac61aa15c0`);
@@ -104,13 +105,13 @@ export default function ChatInterface() {
     try {
       const newMessage = {
         content,
-        senderID: '674bf3a07e5eb5e5968c12db',
-        chatID: '678355d4649ed6ac61aa15c0',
+        senderID: '674bf3a07e5eb5e5968c12db',//database details
+        chatID: '678355d4649ed6ac61aa15c0',//database details
         type: 'sendMessage',
       };
 
       socket.send(JSON.stringify(newMessage));
-
+//backend url ek dapan
       const response = await axios.post('http://localhost:8000/api/chat/messages', newMessage, {
         headers: {
           'Content-Type': 'application/json',
@@ -127,7 +128,7 @@ export default function ChatInterface() {
           ? {
               ...group,
               lastMessage: {
-                sender: 'You',
+                sender: 'You',//sender Id ek dapan
                 content: file ? `Sent a file: ${file.name}` : content,
                 time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
               },

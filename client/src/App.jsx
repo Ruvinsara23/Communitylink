@@ -5,9 +5,9 @@ import { CreateCommunity } from './routes/createCommunity';
 import { SetUpCommunity } from './routes/setupComminity';
 import {CommunityHomePage} from './routes/communityHomePage';
 import ChatInterface from './routes/chat';
-
 import './index.css'
 import SignUpPage from './components/signUpPage/signUpPage';
+import Home from './routes/home';
 
 
 
@@ -21,6 +21,7 @@ function App() {
   //<SetuCommunity />
   return (
     <Routes>
+    <Route path='/home' element={<Home />} />
     <Route path='/auth' element={<Auth/>} />
     <Route path='/create-community' element={<CreateCommunity />}/>
     <Route path='/setup-community' element={<SetUpCommunity />}/>

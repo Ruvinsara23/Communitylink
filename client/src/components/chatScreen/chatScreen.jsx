@@ -1,25 +1,8 @@
-import { useState, useEffect } from 'react';
+
 import MessageInput from '../messageInput/messageInput';
-import axios from 'axios';
 
-export function ChatScreen({ group, messages,handleSendMessage, onCreateGroup }) {
 
-  // const handleSendMessage = async (message, file) => {
-  //   // Ensure message or file is present before proceeding
-  //   if (!message && !file) return;
-
-  //   const newMessage = {
-  //     chatID: '6780b95300ff81739896bb37', 
-  //     senderID: "674bf3a07e5eb5e5968c12db", // This should be dynamically fetched from your user/auth state
-  //     content: message || file.name || 'No content',
-  //     file: file ? { url: 'path/to/file', name: file.name } : undefined, // Adjust as needed
-  //     time: new Date().toISOString(),
-  //   };
-  
-    
-  //   onSendMessage(newMessage);
-  //   console.log('Preparing to send message...',newMessage);
-  // };
+export function ChatScreen( group, messages,handleSendMessage) {
 
 
   if (!group) {
@@ -48,8 +31,8 @@ export function ChatScreen({ group, messages,handleSendMessage, onCreateGroup })
                 className="rounded-full"
               />
             )}
-            <div className={`flex ${message.senderID.name === 'Pansilu' ? 'justify-end' : 'justify-start'} mb-3`}>
-            <div className={`max-w-md ${message.senderID.name === 'Pansilu' ? 'text-right' : 'text-left'}`}>
+            <div className={`flex ${message.senderID.name === 'You' ? 'justify-end' : 'justify-start'} mb-3`}>
+            <div className={`max-w-md ${message.senderID.name === 'You' ? 'text-right' : 'text-left'}`}>
               <p className="font-semibold">{message.senderID.name || 'unknown sender'}</p>
               <div
                 className={`p-3 rounded-xl ${

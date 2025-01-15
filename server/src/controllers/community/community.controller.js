@@ -27,22 +27,20 @@ exports.createCommunity=async(req,res)=>{
 }
 
 exports.getComunitiesByUser=async(req,res)=>{
-  const {userId}=req.body;
+  const { userId } = req.params; 
 
 
 try{
-
     const createdCommunities = await Community.find({
         createdBy:userId
       });
     
-      const adminCommunities = await Community.find({
-        
+      const adminCommunities = await Community.find({ 
         admins:userId
     });
     
     const memberCommunities= await Community.find({members:userId,
-        createdBy:{$ne:userId},
+        members: userId,
         createdBy: {$ne: userId},
         admins: {$ne:userId},
     })

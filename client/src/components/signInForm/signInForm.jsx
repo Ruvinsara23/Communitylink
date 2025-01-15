@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useState,useContext} from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -7,7 +7,7 @@ import GoogleSignInButton from '../googleSignInButton/googleSignInButton'
 import {signInWithEmailAndPassword } from 'firebase/auth'
 import {auth} from '../../utils/config/firebase.js'
 import { useNavigate } from 'react-router'
-
+// import { UserContext } from '../../context/user.context.jsx'
 
 
 
@@ -18,10 +18,11 @@ const defaultFormField={
 
 const SignInForm = () => {
 
-    const [formField,setFormField]=useState(defaultFormField)
-    const {email,password}=formField
-    const [passwordError, setPasswordError] = useState("")
-    const navigate=useNavigate()
+    const [formField,setFormField]=useState(defaultFormField);
+    const {email,password}=formField;
+    const [passwordError, setPasswordError] = useState("");
+    const navigate=useNavigate();
+    // const {setCurrentUser}=useContext(UserContext);
 
     const resetFormFeild=()=>setFormField(defaultFormField)
 
@@ -43,6 +44,7 @@ const SignInForm = () => {
 
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const userData = await userCredential.user
+        // setCurrentUser(userData);
         console.log("this is user",userData)
             if(!userCredential){
                 setPasswordError()
