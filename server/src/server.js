@@ -4,6 +4,7 @@ const authRoutes = require("./routes/api/auth/auth.router");
 const communityRouter = require("./routes/api/community/community.router");
 const chatRouter = require("./routes/api/chat/chat.router");
 const messageRouter = require("./routes/api/message/message.router");
+const eventRouter = require('./routes/api/event/event.router');
 const WebSocket = require('ws');
 require('dotenv').config();
 const cors = require("cors");
@@ -19,6 +20,7 @@ app.use(cors({
 }));
 
 // Attach REST API routes
+app.use('/api/event',eventRouter)
 app.use('/api/chat', chatRouter);
 app.use('/api/auth', authRoutes);
 app.use('/api/community', communityRouter);
