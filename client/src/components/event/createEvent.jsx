@@ -1,6 +1,5 @@
-"use client";
-
 import { useState } from "react";
+import axios from "axios";
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -12,16 +11,62 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import {
   Calendar,
-  Clock,
   MapPin,
-  Users,
-  MessageSquare,
-  ArrowLeft,
   ImageIcon,
+  ArrowLeft,
 } from "lucide-react";
 
-export function CreateEventDialog( {open, onOpenChange} ) {
+export function CreateEventDialog({ open, onOpenChange }) {
+  const [form, setForm] = useState({
+    title: "",
+    startDate: "",
+    startTime: "",
+    endDate: "",
+    endTime: "",
+    description: "",
+    location: "",
+    communityId: "", // Replace this with the actual community ID
+  });
+
   const [coverImage, setCoverImage] = useState("");
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const { title, startDate, startTime, endDate, endTime, description, location, communityId } = form;
+
+      // Combine date and time into ISO 8601 datetime strings
+      const startDateTime = new Date(`${startDate}T${startTime}`).toISOString();
+      const endDateTime = new Date(`${endDate}T${endTime}`).toISOString();
+
+      // Prepare the request payload
+      const payload = {
+        title,
+        description,
+        startDate: startDateTime,
+        endDate: endDateTime,
+        location,
+        coverImage, // Base64 image
+        communityId:"6780b95300ff81739896bb37",
+      };
+
+      // Send the POST request
+      const response = await axios.post("http://localhost:8000/api/event", payload);
+
+      console.log("Event created successfully:", response.data);
+      alert("Event created successfully!");
+
+      
+      onOpenChange(false);
+    } catch (error) {
+      console.error("Error creating event:", error);
+      alert("Failed to create the event. Please try again.");
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -73,35 +118,54 @@ export function CreateEventDialog( {open, onOpenChange} ) {
           </div>
 
           <div className="space-y-4">
-            <div>
-              <Input
-                placeholder="e.g. Weekly community meetup"
-                className="text-lg"
-              />
-            </div>
+            <Input
+              name="title"
+              placeholder="e.g. Weekly community meetup"
+              className="text-lg"
+              value={form.title}
+              onChange={handleInputChange}
+            />
 
             <div className="space-y-4 rounded-lg border p-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-5 w-5" />
-                  <span className="font-medium">Details</span>
-                </div>
+              <div className="flex items-center gap-2">
+                <Calendar className="h-5 w-5" />
+                <span className="font-medium">Details</span>
               </div>
 
               <div className="grid gap-4">
                 <div className="grid gap-2">
                   <label className="text-sm font-medium">Start</label>
                   <div className="grid grid-cols-2 gap-2">
-                    <Input type="date" />
-                    <Input type="time" />
+                    <Input
+                      type="date"
+                      name="startDate"
+                      value={form.startDate}
+                      onChange={handleInputChange}
+                    />
+                    <Input
+                      type="time"
+                      name="startTime"
+                      value={form.startTime}
+                      onChange={handleInputChange}
+                    />
                   </div>
                 </div>
 
                 <div className="grid gap-2">
                   <label className="text-sm font-medium">End</label>
                   <div className="grid grid-cols-2 gap-2">
-                    <Input type="date" />
-                    <Input type="time" />
+                    <Input
+                      type="date"
+                      name="endDate"
+                      value={form.endDate}
+                      onChange={handleInputChange}
+                    />
+                    <Input
+                      type="time"
+                      name="endTime"
+                      value={form.endTime}
+                      onChange={handleInputChange}
+                    />
                   </div>
                 </div>
 
@@ -111,56 +175,28 @@ export function CreateEventDialog( {open, onOpenChange} ) {
                     <span className="text-muted-foreground">(optional)</span>
                   </label>
                   <Textarea
+                    name="description"
                     placeholder="A short intro to let the members know why they should attend"
                     className="resize-none"
+                    value={form.description}
+                    onChange={handleInputChange}
                   />
-                  <div className="text-right text-sm text-muted-foreground">
-                    0/5000
-                  </div>
                 </div>
 
-                <Input placeholder="nas.io/dollp..." />
+                <Input
+                  name="location"
+                  placeholder="Location (e.g. Community Hall)"
+                  value={form.location}
+                  onChange={handleInputChange}
+                />
               </div>
             </div>
-
-            <Button
-              variant="outline"
-              className="w-full justify-start"
-              onClick={() => {}}
-            >
-              <MapPin className="mr-2 h-4 w-4" />
-              Location
-            </Button>
-
-            <Button
-              variant="outline"
-              className="w-full justify-start"
-              onClick={() => {}}
-            >
-              <Users className="mr-2 h-4 w-4" />
-              Pricing & Access
-            </Button>
-
-            <Button
-              variant="outline"
-              className="w-full justify-start"
-              onClick={() => {}}
-            >
-              <Clock className="mr-2 h-4 w-4" />
-              Host
-            </Button>
-
-            <Button
-              variant="outline"
-              className="w-full justify-start"
-              onClick={() => {}}
-            >
-              <MessageSquare className="mr-2 h-4 w-4" />
-              Event chat group
-            </Button>
           </div>
           <div className="sticky bottom-0 flex justify-end border-t bg-background pt-4">
-            <Button className="bg-yellow-400 text-black hover:bg-yellow-500">
+            <Button
+              className="bg-yellow-400 text-black hover:bg-yellow-500"
+              onClick={handleSubmit}
+            >
               Create Event
             </Button>
           </div>

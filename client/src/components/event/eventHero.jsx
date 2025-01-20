@@ -1,4 +1,5 @@
 import { Button } from "../ui/button"
+import { EventList } from "./eventCardList"
 
 export function EventsHero() {
   return (
@@ -10,6 +11,9 @@ export function EventsHero() {
       <div className="flex gap-4">
         <Button className="bg-yellow-400 text-black hover:bg-yellow-500">Create Event</Button>
         <Button variant="outline">Learn more</Button>
+      </div>
+      <div className="space-y-4 py-8">
+      <EventList />
       </div>
     </div>
   )
