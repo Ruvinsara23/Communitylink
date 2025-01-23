@@ -58,8 +58,8 @@ export function DashboardNav() {
           icon: Trophy,
         },
         {
-          title: "Products",
-          href: "/products",
+          title: "Poll",
+          href: "/poll",
           icon: Package,
         },
         {

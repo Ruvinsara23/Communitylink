@@ -9,6 +9,7 @@ import './index.css'
 import SignUpPage from './components/signUpPage/signUpPage';
 import Home from './routes/home';
 import EventPage from './routes/event';
+import PollingPage from './routes/poll';
 import { DashboardNav } from './components/dashboardNav/dashboardNav';
 import { DashboardShell } from './components/dashboardSell/dashboardShell';
 import { DashboardHeader } from './components/dashboardHeader/dashboardHeader';
@@ -32,11 +33,13 @@ function App() {
     <Route path='/community/test-community' element={<CommunityHomePage />} />
     <Route path='/community-home' element={<CommunityHomePage />} >
     <Route path='chat' element={<ChatInterface />} />
+
     </Route>
 
     <Route path='/' element={<DashboardShell />} >
    
     <Route index element={<Home />} />
+    <Route path="poll" element={<PollingPage />} />
     <Route path="events" element={<EventPage />} />
     <Route path="members" element={<MembersPage />} />
    
