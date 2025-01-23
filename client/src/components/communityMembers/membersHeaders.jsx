@@ -6,7 +6,7 @@ import { Filter, Search, UserPlus, Download, MessageSquare } from 'lucide-react'
 
 
 export function MembersHeader() {
-
+   
 
   return (
     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -14,10 +14,9 @@ export function MembersHeader() {
         <Button variant="outline" size="sm">
           <Filter className="mr-2 h-4 w-4" />
           Filter
-          <span className="ml-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 px-1.5 text-xs text-white">
+          <span className="ml-2 rounded-full bg-primary px-1.5 text-xs text-primary-foreground">
             1
           </span>
-
         </Button>
         <div className="relative flex-1 md:max-w-sm">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -37,13 +36,12 @@ export function MembersHeader() {
           <Download className="mr-2 h-4 w-4" />
           Export
         </Button>
-        <Button size="sm" className="bg-gradient-to-r from-purple-500 to-blue-500 text-white">
+        <Button size="sm" className="bg-gray-900">
           <MessageSquare className="mr-2 h-4 w-4" />
           Message
         </Button>
       </div>
     </div>
-
   )
 }
 

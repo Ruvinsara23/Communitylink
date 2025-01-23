@@ -84,8 +84,7 @@ export function DashboardNav() {
           {/* Header */}
           <div className="flex h-14 items-center border-b px-4">
             <Link className="flex items-center gap-2 font-semibold" to="/">
-            <span className="h-6 w-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
-
+              <span className="h-6 w-6 rounded-full bg-primary" />
               Dollpenguin
             </Link>
           </div>
