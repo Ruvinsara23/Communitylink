@@ -93,7 +93,7 @@ const SignUpForm = () => {
       />
     </div>
     {passwordError && <p className="text-red-500">{passwordError}</p>}
-    <Button type="submit" className="w-full bg-blue-700 text-white hover:bg-blue-600 focus-visible:ring-blue-500">Sign Up</Button>
+    <Button type="submit" className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:from-purple-400 hover:to-blue-400 focus-visible:ring-blue-500">Sign Up</Button>
     {""?.message && <p className="text-green-500">{"".message}</p>}
     <div className="relative">
       <div className="absolute inset-0 flex items-center">
