@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema({
         ref: 'Community', 
         required: true 
     }, 
-    authorId: { 
+    userId: { 
         type: mongoose.Schema.Types.ObjectId,
          ref: 'User', 
          required: true

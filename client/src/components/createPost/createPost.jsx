@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ImagePlus, Send } from 'lucide-react';
@@ -8,7 +9,9 @@ const CreatePost = () => {
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Clear image preview on unmount to prevent memory leaks
   useEffect(() => {
     return () => {
       if (imagePreview) {
@@ -17,28 +20,65 @@ const CreatePost = () => {
     };
   }, [imagePreview]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('New post:', content);
-    console.log('Image:', image);
-    setContent('');
-    setImage(null);
-    setImagePreview(null);
-  };
-
+  // Function to convert image to Base64 and send as JSON
   const handleImageUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      setImage(file);
-      setImagePreview(URL.createObjectURL(file));
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // Store Base64 encoded image in state
+        setImage(reader.result);
+        setImagePreview(URL.createObjectURL(file));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Handle the post submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!content.trim()) {
+      alert("Post content cannot be empty.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    // Prepare the data as a plain JSON object
+    const postData = {
+      content: content,
+      userId: '674b8fa06060947df883f105', // Replace with logged-in user's ID
+      communityId: '6780b95300ff81739896bb37', // Replace with the current community ID
+      image: image ? image : null, // Send Base64 encoded image
+    };
+
+    try {
+      const response = await axios.post('http://localhost:8000/api/post', postData, {
+        headers: {
+          'Content-Type': 'application/json', // Sending JSON instead of multipart/form-data
+        },
+      });
+      console.log('Post created:', response.data);
+      setContent('');
+      setImage(null);
+      setImagePreview(null);
+    } catch (error) {
+      console.error('Error creating post:', error);
+      alert('Failed to create post. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-8 bg-white p-4 rounded-lg shadow max-w-[742px] mx-auto">
+    <form
+      onSubmit={handleSubmit}
+      className="mb-8 bg-white p-4 rounded-lg shadow max-w-[742px] mx-auto"
+    >
       <div className="flex items-center mb-4">
-       
-      <img src={profileImage} alt="Profile" 
+        <img
+          src={profileImage}
+          alt="Profile"
           width={40}
           height={40}
           className="rounded-full mr-3"
@@ -64,7 +104,6 @@ const CreatePost = () => {
       )}
       <div className="flex justify-between items-center">
         <div>
-          {/* Handle Image Upload */}
           <input
             type="file"
             id="image-upload"
@@ -79,11 +118,15 @@ const CreatePost = () => {
           </label>
           {image && <span className="ml-2 text-sm text-gray-500">{image.name}</span>}
         </div>
-        
-        <Button type="submit" className="bg-blue-700 text-white font-bold px-4 py-2 rounded-md hover:bg-indigo-700 hover:text-white transition-colors">
-  <Send className="h-4 w-4 mr-2" />
-  Post
-</Button>
+
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          className="bg-blue-700 text-white font-bold px-4 py-2 rounded-md hover:bg-indigo-700 hover:text-white transition-colors"
+        >
+          <Send className="h-4 w-4 mr-2" />
+          {isSubmitting ? 'Posting...' : 'Post'}
+        </Button>
       </div>
     </form>
   );
