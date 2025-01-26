@@ -53,8 +53,8 @@ export function DashboardNav() {
       title: "ENGAGE",
       items: [
         {
-          title: "Challenges",
-          href: "/challenges",
+          title: "chat",
+          href: "/chat",
           icon: Trophy,
         },
         {

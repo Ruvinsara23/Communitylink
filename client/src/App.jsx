@@ -30,10 +30,11 @@ function App() {
     <Route path='/auth' element={<Auth/>} />
     <Route path='/create-community' element={<CreateCommunity />}/>
     <Route path='/setup-community' element={<SetUpCommunity />}/>
-    <Route path='/community/test-community' element={<CommunityHomePage />} />
+    <Route path='/community/test-community' element={<CommunityHomePage />} >
+    <Route path="chat" element={<ChatInterface />} />
+    </Route>
     <Route path='/community-home' element={<CommunityHomePage />} >
     <Route path='chat' element={<ChatInterface />} />
-
     </Route>
 
     <Route path='/' element={<DashboardShell />} >
@@ -42,7 +43,7 @@ function App() {
     <Route path="poll" element={<PollingPage />} />
     <Route path="events" element={<EventPage />} />
     <Route path="members" element={<MembersPage />} />
-   
+    <Route path="chat" element={<ChatInterface />} />
     </Route>
     </Routes>
    

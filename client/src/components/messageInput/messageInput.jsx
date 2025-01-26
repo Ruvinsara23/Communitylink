@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Paperclip } from 'lucide-react'
 
-export default function MessageInput(handleSendMessage) {
+export default function MessageInput({handleSendMessage}) {
   const [message, setMessage] = useState('')
   const [file, setFile] = useState(null)
   const fileInputRef = useRef(null)

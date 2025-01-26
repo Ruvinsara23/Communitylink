@@ -6,7 +6,7 @@ const Navbar = () => {
 
 
  const handleNavigate=()=>{
-    navigate('/chat-room');
+    navigate('chat');
  }
 
   return (

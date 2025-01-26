@@ -158,7 +158,7 @@ export default function ChatInterface() {
 
   return (
     <div className="flex h-screen">
-      <Sidebar groups={groups} onSelectGroup={setSelectedGroup} onCreateGroup={handleCreateGroup} />
+      <Sidebar groups={groups} setSelectedGroup={setSelectedGroup} onCreateGroup={handleCreateGroup} />
       <ChatScreen group={selectedGroup} messages={messages} handleSendMessage={handleSendMessage} />
     </div>
   );

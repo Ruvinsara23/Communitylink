@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,6 +10,7 @@ const CreatePost = () => {
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const fileInputRef = useRef(null);
 
   // Clear image preview on unmount to prevent memory leaks
   useEffect(() => {
@@ -32,6 +33,11 @@ const CreatePost = () => {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  // Function to handle image click
+  const handleImageClick = () => {
+    fileInputRef.current.click(); // Trigger file input click
   };
 
   // Handle the post submission
@@ -106,16 +112,19 @@ const CreatePost = () => {
         <div>
           <input
             type="file"
-            id="image-upload"
+            ref={fileInputRef}
             className="hidden"
             accept="image/*"
             onChange={handleImageUpload}
           />
-          <label htmlFor="image-upload" className="cursor-pointer">
-            <Button type="button" variant="outline" size="icon">
-              <ImagePlus className="h-4 w-4" />
-            </Button>
-          </label>
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            onClick={handleImageClick}
+          >
+            <ImagePlus className="h-4 w-4" />
+          </Button>
           {image && <span className="ml-2 text-sm text-gray-500">{image.name}</span>}
         </div>
 

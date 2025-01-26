@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
+
+mongoose.set('strictPopulate', true);
 const { v4: uuidv4 } = require('uuid'); 
+
+
+
 
 const communitySchema = new mongoose.Schema({
   name: {
@@ -40,6 +45,8 @@ const communitySchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Post', 
+      strictPopulate: false
+      
     },
   ],
   events: [

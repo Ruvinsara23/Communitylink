@@ -1,4 +1,5 @@
 const Post = require('../../models/post/post.model');
+const Community = require('../../models/community/community.model');
 
 exports.getAllPosts = async (req, res) => {
     exports.getAllPosts = async (req, res) => {

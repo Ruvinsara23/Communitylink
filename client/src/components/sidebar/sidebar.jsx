@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-export function Sidebar({ groups = [], onSelectGroup, onCreateGroup }) {
+export function Sidebar({ groups = [], onCreateGroup, setSelectedGroup }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [newGroupName, setNewGroupName] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -94,6 +94,12 @@ export function Sidebar({ groups = [], onSelectGroup, onCreateGroup }) {
       alert('Failed to create group. Please try again.');
     } finally {
       setIsCreating(false);
+    }
+  };
+
+  const onSelectGroup = (group) => {
+    if (setSelectedGroup) {
+      setSelectedGroup(group);
     }
   };
 
