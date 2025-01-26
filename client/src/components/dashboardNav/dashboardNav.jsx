@@ -67,11 +67,11 @@ export function DashboardNav() {
           href: "/events",
           icon: Calendar,
         },
-        {
-          title: "Feed",
-          href: "/feed",
-          icon: ScrollText,
-        },
+        // {
+        //   title: "Feed",
+        //   href: "/feed",
+        //   icon: ScrollText,
+        // },
       ],
     },
   ];
@@ -85,7 +85,7 @@ export function DashboardNav() {
           <div className="flex h-14 items-center border-b px-4">
             <Link className="flex items-center gap-2 font-semibold" to="/">
               <span className="h-6 w-6 rounded-full bg-primary" />
-              Dollpenguin
+              Home
             </Link>
           </div>
 
