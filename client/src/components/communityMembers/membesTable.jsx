@@ -56,7 +56,7 @@ export function MembersTable() {
               <TableHead>Contact</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Join date</TableHead>
-              <TableHead>Lifetime Value</TableHead>
+             
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -79,7 +79,7 @@ export function MembersTable() {
                   </Badge>
                 </TableCell>
                 <TableCell>{member.joinDate}</TableCell>
-                <TableCell>{member.lifetimeValue}</TableCell>
+              
               </TableRow>
             ))}
           </TableBody>

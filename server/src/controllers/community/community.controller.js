@@ -63,7 +63,7 @@ exports.getCommunityBySlug=async(req,res)=>{
     const {slug}=req.params
     console.log('Received slug:', slug);
     try{
-        const community= await Community.findOne({slug:'testnew'})
+        const community= await Community.findOne({slug:slug})
         .populate('members', 'name email')
         .populate('admins', 'name email')
         .populate({

@@ -15,15 +15,20 @@ export const CommunityProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [posts,setPosts] = useState([]);
+  const [chat,setChat] = useState([]);
+  const [members,setMembers] = useState([]);
+  const [events,setEvents] = useState([]);
+  const [polls,setPolls] = useState([]);  
+  const [communityId, setCommunityId] = useState  ('');
 
 
-  const userId = "674c4b8c931d4af7065ee1c0"; 
+  const userId = "674b8fa06060947df883f105"; 
   const fetchCommunitiesByUser = async (userId) => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await axios.get(`http://localhost:8000/api/community/user/674c4b8c931d4af7065ee1c0`);
+      const response = await axios.get(`http://localhost:8000/api/community/user/${userId}`);
       console.log("Response",response.data);
       const { createdCommunities, adminCommunities, memberCommunities,} = response.data;
       setCreatedCommunities(createdCommunities);
@@ -38,13 +43,22 @@ export const CommunityProvider = ({ children }) => {
     }
   };
 
-  const fetchCommunityPosts = async (slug) => {
+  const fetchCommunityPosts = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await axios.get(`http://localhost:8000/api/community/${slug}/posts`);
+      const response = await axios.get(`http://localhost:8000/api/community/testnew`);
       setPosts(response.data.posts);
+      setChat(response.data.chat);
+      setMembers(response.data.members);
+      setEvents(response.data.events);
+      setPolls(response.data.polls);
+      setCommunityId(response.data.community._id);
+      console.log("communityId",response.data.community._id); 
+
+
+      console.log("Response",response.data);
     } catch (err) {
       setError(err.response?.data?.message || "An error occurred while fetching community posts");
     } finally {
@@ -54,7 +68,8 @@ export const CommunityProvider = ({ children }) => {
 
 
   useEffect(() => {
-    fetchCommunitiesByUser();
+    fetchCommunitiesByUser(userId);
+    fetchCommunityPosts ()
   }, [userId]);
 
   return (
@@ -66,7 +81,14 @@ export const CommunityProvider = ({ children }) => {
         fetchCommunitiesByUser,
         loading,
         error,
-        fetchCommunityPosts
+        fetchCommunityPosts,
+        posts,
+        chat,
+        members,
+        events,
+        polls,
+        communityId,
+
       }}
     >
       {children}

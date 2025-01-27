@@ -26,16 +26,15 @@ function App() {
 
       {/* Community Routes */}
       <Route path="/community" element={<Navbar />}>
-        <Route path="test-community" element={<CommunityHomePage />}>
+          {/* Nested routes */}
+          <Route path=":communitySlug" element={<CommunityHomePage />} />
+          <Route path=":communitySlug/chat" element={<ChatInterface />} />
+          <Route path=":communitySlug/members" element={<MembersPage />} />
+          <Route path=":communitySlug/about" element={<CommunityProfile />} />
         </Route>
-        <Route path="chat" element={<ChatInterface />} />
-        <Route path="members" element={<MembePagrse />} />
-        <Route path="about" element={<CommunityProfile />} />
-
-      </Route>
 
       {/* Dashboard */}
-      <Route path="/dashbord" element={<DashboardShell />}>
+      <Route path="/" element={<DashboardShell />}>
         <Route index element={<Home />} />
         <Route path="poll" element={<PollingPage />} />
         <Route path="events" element={<EventPage />} />

@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext } from 'react';
 import { ChatScreen } from '../components/chatScreen/chatScreen';
 import { Sidebar } from '../components/sidebar/sidebar';
 import axios from 'axios';
+import { useCommunity } from '../context/community.context';
+
 
 
 export default function ChatInterface() {
@@ -11,7 +13,9 @@ export default function ChatInterface() {
   const [refreshGroups, setRefreshGroups] = useState(false);
   const [socket, setSocket] = useState(null);
 
- 
+ const {
+    communityId
+ } = useCommunity();
 
   useEffect(() => {
     //websocket connection
@@ -46,9 +50,9 @@ export default function ChatInterface() {
 
 
   useEffect(() => {
-    async function fetchGroups() {
+    async function fetchGroups(communityId) {
       try {
-        const response = await fetch('http://localhost:8000/api/chat/6780b95300ff81739896bb37');
+        const response = await fetch(`http://localhost:8000/api/chat/${communityId}`);//backend url ek dapan
         if (!response.ok) throw new Error('Failed to fetch groups');
         const data = await response.json();
         setGroups(data.chats);
@@ -58,8 +62,8 @@ export default function ChatInterface() {
       }
     }
 
-    fetchGroups();
-  }, [refreshGroups]);
+    fetchGroups(communityId);
+  }, [refreshGroups,communityId]);
 
 
   useEffect(() => {

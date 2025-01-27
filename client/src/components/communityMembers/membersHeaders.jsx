@@ -32,16 +32,17 @@ export function MembersHeader() {
           <UserPlus className="mr-2 h-4 w-4" />
           Invite
         </Button>
-        <Button variant="outline" size="sm">
-          <Download className="mr-2 h-4 w-4" />
-          Export
-        </Button>
-        <Button size="sm" className="bg-gray-900">
-          <MessageSquare className="mr-2 h-4 w-4" />
-          Message
-        </Button>
+       
       </div>
     </div>
   )
 }
 
+// <Button variant="outline" size="sm">
+// <Download className="mr-2 h-4 w-4" />
+// Export
+// </Button>
+// <Button size="sm" className="bg-gray-900">
+// <MessageSquare className="mr-2 h-4 w-4" />
+// Message
+// </Button>

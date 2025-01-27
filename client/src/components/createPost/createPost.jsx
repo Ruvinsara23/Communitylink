@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ImagePlus, Send } from 'lucide-react';
 import profileImage from '../../assets/profile.jpeg';
 
-const CreatePost = () => {
+const CreatePost = ({communityId} ) => {
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -54,7 +54,7 @@ const CreatePost = () => {
     const postData = {
       content: content,
       userId: '674b8fa06060947df883f105', // Replace with logged-in user's ID
-      communityId: '6780b95300ff81739896bb37', // Replace with the current community ID
+      communityId: communityId , // Replace with the current community ID
       image: image ? image : null, // Send Base64 encoded image
     };
 

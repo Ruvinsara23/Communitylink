@@ -3,7 +3,8 @@ import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../components/ui/dialog";
 import { Plus, Vote } from "lucide-react";
 import PollCreator from "../components/poll/createPoll";
-import axios from "axios"; // For API requests
+import axios from "axios"; 
+import { useCommunity } from "../context/community.context";
 
 export default function PollingPage() {
   // State for storing polls
@@ -11,26 +12,30 @@ export default function PollingPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch data from the API when the component mounts
+
+  const {communityId} = useCommunity();
+
+
+  
   useEffect(() => {
-    const fetchPolls = async () => {
+    const fetchPolls = async (communityId) => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:8000/api/poll/community/6780b95300ff81739896bb37");
-        setPolls(response.data); // Assuming the API returns an array of polls
+        const response = await axios.get(`http://localhost:8000/api/poll/community/${communityId}`);
+        setPolls(response.data); 
         setLoading(false);
-      } catch (err) {
-        setError("Failed to load polls.");
+      } catch (error) {
+        setError("Failed to load polls.", error);
         setLoading(false);
       }
     };
 
-    fetchPolls();
-  }, []);
+    fetchPolls(communityId);
+  }, [communityId]);
 
   return (
     <div className="container mx-auto py-8 px-4">
-      {/* Header Section */}
+     
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-4xl font-bold mb-2">Polling Dashboard</h1>
@@ -52,7 +57,7 @@ export default function PollingPage() {
         </Dialog>
       </div>
 
-      {/* Poll History Section */}
+     
       <div className="space-y-6">
         <h2 className="text-2xl font-semibold mb-4">Poll History</h2>
         {loading && <p>Loading polls...</p>}

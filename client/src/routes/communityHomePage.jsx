@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import axios from "axios";
 import PostList from "../components/postList/postList";
 import Layout from "../components/layout/layout.jsx";
@@ -6,9 +7,11 @@ import CreatePost from "../components/createPost/createPost";
 
 export const CommunityHomePage = () => {
   const [posts, setPosts] = useState([]);
+  const [communityId, setCommunityId] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const communitySlug = "testnew"; // Replace with actual slug dynamically if needed
+  const { communitySlug } = useParams(); 
+ // Replace with actual slug dynamically if needed
 
   useEffect(() => {
     const fetchCommunityData = async () => {
@@ -22,7 +25,9 @@ export const CommunityHomePage = () => {
         const community = response.data.community;
         console.log("Community data:", community);
         setPosts(community.posts || []); 
-        console.log("community post",community.post)// Extract only the posts from the response
+        console.log("community post",community.posts)
+        console.log("Id",community._id);
+        setCommunityId(community._id);// Extract only the posts from the response
       } catch (err) {
         setError("Failed to fetch community data");
         console.error("Error fetching community:", err);
@@ -54,7 +59,7 @@ export const CommunityHomePage = () => {
       <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-yellow-300 to-black">
         Welcome
       </h1>
-      <CreatePost />
+      <CreatePost communityId={communityId} />
       <PostList
         posts={posts}
         onLike={handleLike}
