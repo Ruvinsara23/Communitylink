@@ -2,14 +2,14 @@ import { Share2, MoreHorizontal } from "lucide-react";
 
 export function EventCard({ event }) {
   return (
-    <div className="p-4 rounded-md shadow-md bg-white border border-gray-200 flex flex-col gap-3">
+    <div className="p-4 rounded-md shadow-md bg-white border border-pink-300 flex flex-col gap-3">
       {/* Title and Cover Image */}
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-bold">{event.name}</h3>
         <img
           src={event.coverImage || "/placeholder.svg"} // Fallback image if coverImage is missing
           alt={event.name}
-          className="h-16 w-32 object-cover rounded-md"
+          className="h-16 w-full object-cover rounded-md"
         />
       </div>
 
@@ -43,7 +43,7 @@ export function EventCard({ event }) {
             ? `${event.attendees.length} attending`
             : "No attendees yet"}
         </p>
-        <button className="bg-black text-white px-3 py-1 rounded-md">
+        <button className="bg-blue-50 text-blue-600  px-3 py-1 rounded-md">
           Manage
         </button>
       </div>

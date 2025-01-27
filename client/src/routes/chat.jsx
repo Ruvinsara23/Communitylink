@@ -3,6 +3,7 @@ import { ChatScreen } from '../components/chatScreen/chatScreen';
 import { Sidebar } from '../components/sidebar/sidebar';
 import axios from 'axios';
 import { useCommunity } from '../context/community.context';
+import { useUser } from '../context/user.context';
 
 
 
@@ -17,9 +18,13 @@ export default function ChatInterface() {
     communityId
  } = useCommunity();
 
+ const {
+    currentUser
+ }=useUser();
+
   useEffect(() => {
-    //websocket connection
-    const ws = new WebSocket('ws://localhost:8000');//backend url ek dapan
+    
+    const ws = new WebSocket('ws://localhost:8000');
     setSocket(ws);
 
     ws.onopen = () => {
@@ -52,7 +57,7 @@ export default function ChatInterface() {
   useEffect(() => {
     async function fetchGroups(communityId) {
       try {
-        const response = await fetch(`http://localhost:8000/api/chat/${communityId}`);//backend url ek dapan
+        const response = await fetch(`http://localhost:8000/api/chat/${communityId}`);
         if (!response.ok) throw new Error('Failed to fetch groups');
         const data = await response.json();
         setGroups(data.chats);
@@ -68,7 +73,7 @@ export default function ChatInterface() {
 
   useEffect(() => {
     if (!selectedGroup) return;
-//backend url ek dapan messages collection ekt adala
+
     async function fetchMessages() {
       try {
         const response = await fetch(`http://localhost:8000/api/chat/messages/678355d4649ed6ac61aa15c0`);
@@ -109,8 +114,8 @@ export default function ChatInterface() {
     try {
       const newMessage = {
         content,
-        senderID: '674bf3a07e5eb5e5968c12db',//database details
-        chatID: '678355d4649ed6ac61aa15c0',//database details
+        senderID:currentUser._id,
+        chatID: '678355d4649ed6ac61aa15c0',
         type: 'sendMessage',
       };
 

@@ -32,9 +32,11 @@ const activities = [
 export function ActivityFeed() {
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
+    <CardHeader className="flex flex-row items-center justify-between">
+
         <CardTitle>Activity</CardTitle>
         <select className="rounded-md border px-2 py-1.5 text-sm">
+
           <option>all</option>
         </select>
       </CardHeader>

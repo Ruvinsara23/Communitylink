@@ -11,7 +11,7 @@ export function EventsHeader() {
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-semibold">Events</h1>
-        <Button onClick={() => setShowCreateDialog(true)} className="bg-yellow-400 text-black hover:bg-yellow-500">
+        <Button onClick={() => setShowCreateDialog(true)} className="bg-blue-600 text-white hover:bg-blue-500">
           <Plus className="mr-2 h-4 w-4" />
           Add Event
         </Button>

@@ -14,7 +14,7 @@ export function MembersHeader() {
         <Button variant="outline" size="sm">
           <Filter className="mr-2 h-4 w-4" />
           Filter
-          <span className="ml-2 rounded-full bg-primary px-1.5 text-xs text-primary-foreground">
+          <span className="ml-2 rounded-full bg-blue-400 px-1.5 text-xs text-primary-foreground">
             1
           </span>
         </Button>
@@ -28,7 +28,7 @@ export function MembersHeader() {
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <Button variant="outline" size="sm">
+        <Button variant="outline" className="bg-blue-600 text-white" size="sm">
           <UserPlus className="mr-2 h-4 w-4" />
           Invite
         </Button>

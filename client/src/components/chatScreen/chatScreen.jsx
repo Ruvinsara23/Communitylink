@@ -3,14 +3,14 @@ import MessageInput from '../messageInput/messageInput';
 export function ChatScreen({ group, messages, handleSendMessage }) {
   if (!group) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-gray-50">
+      <div className="flex-1  flex items-center justify-center bg-gray-50">
         <p className="text-xl text-gray-500">Select a group to start chatting</p>
       </div>
     );
   }
 
   return (
-    <div className="flex-1 flex flex-col">
+    <div className="flex-1 flex flex-col w-full">
       <div className="bg-white border-b p-4 flex justify-between items-center">
         <h2 className="text-xl font-semibold">{group.name}</h2>
       </div>

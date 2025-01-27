@@ -85,7 +85,7 @@ export function CreateEventDialog({ open, onOpenChange }) {
         </DialogHeader>
         <div className="space-y-6 py-4 overflow-y-auto max-h-[calc(90vh-8rem)]">
           <div
-            className="group relative aspect-[2/1] cursor-pointer overflow-hidden rounded-lg bg-gradient-to-r from-orange-300 to-yellow-300"
+            className="group relative aspect-[2/1] cursor-pointer overflow-hidden rounded-lg bg-gradient-to-r from-blue-300 to-blue-500"
             onClick={() => document.getElementById("cover-image")?.click()}
           >
             {coverImage ? (
@@ -96,7 +96,7 @@ export function CreateEventDialog({ open, onOpenChange }) {
               />
             ) : (
               <div className="flex h-full items-center justify-center">
-                <ImageIcon className="h-8 w-8 text-gray-400" />
+                <ImageIcon className="h-8 w-8 text-white" />
               </div>
             )}
             <input
@@ -194,7 +194,7 @@ export function CreateEventDialog({ open, onOpenChange }) {
           </div>
           <div className="sticky bottom-0 flex justify-end border-t bg-background pt-4">
             <Button
-              className="bg-yellow-400 text-black hover:bg-yellow-500"
+              className="bg-blue-600 text-white hover:bg-blue-500"
               onClick={handleSubmit}
             >
               Create Event

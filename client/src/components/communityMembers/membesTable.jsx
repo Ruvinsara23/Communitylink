@@ -74,7 +74,7 @@ export function MembersTable() {
                   {member.email}
                 </TableCell>
                 <TableCell>
-                  <Badge variant="secondary" className="bg-green-50 text-green-700">
+                  <Badge variant="secondary" className="bg-blue-50 text-blue-700">
                     {member.status}
                   </Badge>
                 </TableCell>

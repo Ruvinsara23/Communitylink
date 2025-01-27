@@ -95,7 +95,7 @@ export default function PollCreator() {
               )}
             </div>
           ))}
-          <Button type="button" variant="outline" onClick={addOption}>
+          <Button type="button"  variant="outline" onClick={addOption}>
             Add option
           </Button>
         </div>
@@ -112,7 +112,7 @@ export default function PollCreator() {
           </div>
         </div>
 
-        <Button type="submit" className="w-full">
+        <Button type="submit"  className="w-full bg-blue-600">
           Create poll
         </Button>
       </form>

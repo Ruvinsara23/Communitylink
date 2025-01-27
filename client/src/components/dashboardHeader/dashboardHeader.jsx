@@ -17,7 +17,7 @@ export function DashboardHeader() {
         <Button variant="outline">
           Invite
         </Button>
-        <Button>
+        <Button  className='bg-blue-700 text-white font-bold px-4 py-2 rounded-md hover:bg-indigo-700 hover:text-white transition-colors'>
           Create
           <ChevronDown className="ml-2 h-4 w-4" />
         </Button>

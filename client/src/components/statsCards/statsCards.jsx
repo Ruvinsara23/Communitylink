@@ -3,8 +3,8 @@ import { Users, DollarSign, LineChart } from 'lucide-react'
 
 export function StatsCards() {
   return (
-    <div className="grid gap-4 md:grid-cols-3">
-      <Card>
+    <div className=" grid gap-4 md:grid-cols-3">
+      <Card className=" border-blue-400">
         <CardContent className="p-6">
           <div className="flex items-center gap-2">
             <LineChart className="h-4 w-4 text-muted-foreground" />
@@ -17,7 +17,7 @@ export function StatsCards() {
           </div>
         </CardContent>
       </Card>
-      <Card>
+      <Card className=" border-blue-800">
         <CardContent className="p-6">
           <div className="flex items-center gap-2">
             <Users className="h-4 w-4 text-muted-foreground" />
@@ -33,7 +33,7 @@ export function StatsCards() {
           </div>
         </CardContent>
       </Card>
-      <Card>
+      <Card className=" border-purple-600">
         <CardContent className="p-6">
           <div className="flex items-center gap-2">
             <DollarSign className="h-4 w-4 text-muted-foreground" />

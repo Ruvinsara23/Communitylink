@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ImagePlus, Send } from 'lucide-react';
 import profileImage from '../../assets/profile.jpeg';
+import { useCommunity } from '../../context/community.context';
+import { UserContext } from '../../context/user.context';
 
 const CreatePost = ({communityId} ) => {
   const [content, setContent] = useState('');

@@ -9,7 +9,7 @@ export function EventsHero() {
         Connect and grow your audience through Weekly meetups or webinars with guest speakers.
       </p>
       <div className="flex gap-4">
-        <Button className="bg-yellow-400 text-black hover:bg-yellow-500">Create Event</Button>
+        <Button className="bg-blue-600 text-white hover:bg-blue-500">Create Event</Button>
         <Button variant="outline">Learn more</Button>
       </div>
       <div className="space-y-4 py-8">

@@ -6,9 +6,9 @@ import Cover from '../../assets/cover.jpg'
 
 function ProfilePreview() {
     // eslint-disable-next-line no-unused-vars
-    const [coverImage, setCoverImage] = useState("/placeholder.svg?height=250&width=400");
+    const [coverImage, setCoverImage] = useState();
     // eslint-disable-next-line no-unused-vars
-    const [profileImage, setProfileImage] = useState("/placeholder.svg?height=100&width=100");
+    const [profileImage, setProfileImage] = useState();
     const [coverImageFile, setCoverImageFile] = useState(null);
     const [profileImageFile, setProfileImageFile] = useState(null);
 
