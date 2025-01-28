@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import IssueSubmissionChat from "./issueSubmitionChat"
 import { MessageCircle } from "lucide-react"
 
-export function ChatBubble() {
+export default function ChatBubble() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (

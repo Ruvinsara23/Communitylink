@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCommunity } from "../../context/community.context";
 import {
   ChevronDown,
@@ -13,9 +13,11 @@ import {
   ScrollText,
   Sprout,
 } from "lucide-react";
+import { useUser } from "../../context/user.context";
 
 export function DashboardNav() {
-  const { createdCommunities, adminCommunities, memberCommunities } = useCommunity();
+  const {fetchCommunitiesByUser, createdCommunities, adminCommunities, memberCommunities } = useCommunity();
+  const { currentUser } = useUser();
 
   const [isCreatedOpen, setIsCreatedOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
@@ -75,6 +77,13 @@ export function DashboardNav() {
       ],
     },
   ];
+
+  useEffect(() => {
+    if (currentUser) {
+      fetchCommunitiesByUser(currentUser); // Fetch the communities for the current user
+    }
+  }, [currentUser]);
+ 
 
   return (
     <>

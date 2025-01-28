@@ -1,7 +1,7 @@
 import { createContext,useState,useContext} from "react";
 
 export const UserContext = createContext({
-    currentUser:"674bf3a07e5eb5e5968c12db",   
+    currentUser:"",   
     setCurrentUser:()=>null,
 
 });

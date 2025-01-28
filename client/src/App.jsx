@@ -15,8 +15,13 @@ import MembersPage from './routes/communityMember';
 import Navbar from './components/navbar/navbar';
 import MembePagrse from './routes/communityMember';
 import CommunityProfile from './routes/communityProfile';
+import { useLocation } from 'react-router-dom';
+
 
 function App() {
+  
+  // const slug = location.state?.slug;
+  
   return (
     <Routes>
       {/* Authentication */}
@@ -24,7 +29,8 @@ function App() {
       <Route path="/create-community" element={<CreateCommunity />} />
       <Route path="/setup-community" element={<SetUpCommunity />} />
 
-      {/* Community Routes */}
+
+      
       <Route path="/community" element={<Navbar />}>
           {/* Nested routes */}
           <Route path=":communitySlug" element={<CommunityHomePage />} />

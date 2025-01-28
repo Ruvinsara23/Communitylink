@@ -55,8 +55,8 @@ const CreatePost = ({communityId} ) => {
     // Prepare the data as a plain JSON object
     const postData = {
       content: content,
-      userId: '674b8fa06060947df883f105', // Replace with logged-in user's ID
-      communityId: communityId , // Replace with the current community ID
+      userId: '6797b1599c75bd4a3a6a8ade', // Replace with logged-in user's ID
+      communityId:'6798836edab2a02f8899e7ba' , // Replace with the current community ID
       image: image ? image : null, // Send Base64 encoded image
     };
 
@@ -91,7 +91,7 @@ const CreatePost = ({communityId} ) => {
           height={40}
           className="rounded-full mr-3"
         />
-        <span className="font-semibold">John Doe</span>
+        <span className="font-semibold">Demo User</span>
       </div>
       <Textarea
         value={content}

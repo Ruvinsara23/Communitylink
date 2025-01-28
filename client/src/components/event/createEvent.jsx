@@ -50,12 +50,14 @@ export function CreateEventDialog({ open, onOpenChange }) {
         startDate: startDateTime,
         endDate: endDateTime,
         location,
-        coverImage, // Base64 image
-        communityId:"6780b95300ff81739896bb37",
+        coverImage, 
+        communityId:"67988811dab2a02f8899e855",
       };
 
-      // Send the POST request
+      
       const response = await axios.post("http://localhost:8000/api/event", payload);
+
+      
 
       console.log("Event created successfully:", response.data);
       alert("Event created successfully!");

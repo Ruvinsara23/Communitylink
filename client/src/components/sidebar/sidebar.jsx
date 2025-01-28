@@ -60,7 +60,7 @@ export function Sidebar({ groups = [], onCreateGroup, setSelectedGroup }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          communityID: '6780b95300ff81739896bb37', 
+          communityID: '6798836edab2a02f8899e7ba', 
           isGroupChat: true, 
           groupName: newGroupName.trim()
         }),

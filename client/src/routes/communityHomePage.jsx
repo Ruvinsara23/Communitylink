@@ -4,6 +4,8 @@ import axios from "axios";
 import PostList from "../components/postList/postList";
 import Layout from "../components/layout/layout.jsx";
 import CreatePost from "../components/createPost/createPost";
+import { useCommunity } from "../context/community.context.jsx";
+import ChatBubble from "../components/issues/chatBubble.jsx";
 
 export const CommunityHomePage = () => {
   const [posts, setPosts] = useState([]);
@@ -11,7 +13,11 @@ export const CommunityHomePage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { communitySlug } = useParams(); 
- // Replace with actual slug dynamically if needed
+ 
+
+
+  const { fetchCommunityPosts } = useCommunity();
+
 
   useEffect(() => {
     const fetchCommunityData = async () => {
@@ -37,6 +43,9 @@ export const CommunityHomePage = () => {
     };
 
     fetchCommunityData();
+    if (communitySlug) {
+      fetchCommunityPosts(communitySlug);
+    }
   }, [communitySlug]);
 
   const handleLike = async (id) => {
@@ -66,6 +75,7 @@ export const CommunityHomePage = () => {
         onComment={handleComment}
         onShare={handleShare}
       />
+      <ChatBubble />
     </Layout>
   );
 };

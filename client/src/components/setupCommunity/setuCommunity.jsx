@@ -5,16 +5,19 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useNavigate } from "react-router"
-
-const url={
-    intialUrl:''
-}
+import { useLocation } from "react-router-dom"
+import axios from "axios"
 
 
 
 const SetuCommunity = () => {
+  const location = useLocation();
+  const slug = location.state?.slug;
+
+ console.log("slug vbnv",slug)
+
    
-    const [communityUrl, setCommunityUrl] = useState(url)
+    const [communityUrl, setCommunityUrl] = useState(`http://localhost:5173/community/${slug}`)
     const [isEditing, setIsEditing] = useState(false)
     const navigate = useNavigate()
 
@@ -22,10 +25,22 @@ const SetuCommunity = () => {
         setIsEditing(false)
       }
     
-      const handleSubmit=()=>{
+      const handleSubmit=async()=>{
 
         try{
-          navigate('/community-home');
+          const userId = '6797b1599c75bd4a3a6a8ade'; 
+          const title = 'Community Setup Successful';
+          const message = `Your community has been successfully created at ${communityUrl}`;
+    
+          
+          await axios.post('http://localhost:8000/api/notifications/notifications', {
+            title,
+            message,
+            userId,
+          });
+
+
+          navigate(`/community/${slug}`);
           // const response=axios.post('http://localhost:8000/api/community/create-community',{})
           //  console.log(response)
         }catch(error){
@@ -42,7 +57,7 @@ const SetuCommunity = () => {
       <div className="flex gap-2 ">
         <Input
           id="community-url"
-          value='http://localhost:5173/community/test-community'
+          value={communityUrl}
           onChange={(e) => setCommunityUrl(e.target.value)}
           disabled={!isEditing}
           className="flex-grow"

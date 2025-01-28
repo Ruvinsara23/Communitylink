@@ -1,7 +1,20 @@
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useParams,useNavigate } from "react-router-dom";
+import { useUser } from "../../context/user.context";
+import { useEffect } from "react";
 
 const Navbar = () => {
-  const { communitySlug } = useParams(); // Extract the slug from the URL
+  const { communitySlug } = useParams();
+  const { currentUser, setCurrentUser } = useUser(); // Extract the slug from the URL
+  const navigate = useNavigate(); 
+
+ 
+
+
+  const handleSignOut = () => {
+    setCurrentUser(null);
+     // Clear the currentUser state
+
+  };
 
   return (
     <nav className="bg-white shadow-md px-6 py-4">
@@ -51,7 +64,16 @@ const Navbar = () => {
               Chat Room
             </Link>
           </li>
+          
+            <button
+              onClick={handleSignOut}
+              className="text-white bg-red-500 hover:bg-red-600 font-bold px-4 py-2 rounded-md transition"
+            >
+              Sign Out
+            </button>
+          
         </ul>
+       
       </div>
       <Outlet /> {/* Render nested components here */}
     </nav>

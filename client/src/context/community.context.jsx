@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, } from "react";
+import { useParams } from "react-router";
 import axios from "axios";
 
 
@@ -20,9 +21,14 @@ export const CommunityProvider = ({ children }) => {
   const [events,setEvents] = useState([]);
   const [polls,setPolls] = useState([]);  
   const [communityId, setCommunityId] = useState  ('');
+  const [bannerImage, setBannerImage] = useState(null);
+  const [communityImage, setCommunityImage] = useState(null); 
+  const [description, setDescription] = useState('');
+  const[name,setname]=useState('');
+  const { slug } = useParams();
 
 
-  const userId = "674b8fa06060947df883f105"; 
+  const userId = "6797b1599c75bd4a3a6a8ade"; 
   const fetchCommunitiesByUser = async (userId) => {
     setLoading(true);
     setError(null);
@@ -43,17 +49,26 @@ export const CommunityProvider = ({ children }) => {
     }
   };
 
-  const fetchCommunityPosts = async () => {
+  const fetchCommunityPosts = async (slug) => {
     setLoading(true);
     setError(null);
 
+    
+
     try {
-      const response = await axios.get(`http://localhost:8000/api/community/testnew`);
+      const response = await axios.get(`http://localhost:8000/api/community/${slug}`)
       setPosts(response.data.posts);
       setChat(response.data.chat);
       setMembers(response.data.members);
       setEvents(response.data.events);
       setPolls(response.data.polls);
+      setCommunityImage(response.data.communityImage );
+      setBannerImage(response.data.community.bannerImage);
+      setDescription(response.data.community.description);
+      setname(response.data.community.name);
+      console.log("Banner",response.data.community.bannerImage);
+      console.log("CommunityImage",response.data.community.communityImage);
+      console.log("Description",response.data.community.description);
       setCommunityId(response.data.community._id);
       console.log("communityId",response.data.community._id); 
 
@@ -69,8 +84,8 @@ export const CommunityProvider = ({ children }) => {
 
   useEffect(() => {
     fetchCommunitiesByUser(userId);
-    fetchCommunityPosts ()
-  }, [userId]);
+    fetchCommunityPosts (slug)
+  }, [userId,slug]);
 
   return (
     <CommunityContext.Provider
@@ -88,6 +103,13 @@ export const CommunityProvider = ({ children }) => {
         events,
         polls,
         communityId,
+        bannerImage,
+        communityImage,
+        description,
+        setBannerImage,
+        setDescription,
+        setCommunityImage,
+        name,
 
       }}
     >

@@ -7,6 +7,9 @@ const messageRouter = require("./routes/api/message/message.router");
 const eventRouter = require('./routes/api/event/event.router');
 const pollRouter = require('./routes/api/poll/poll.router');
 const postRouter = require('./routes/api/post/post.router');
+const notificationRouter = require('./routes/api/notification/notification.route');
+
+
 const WebSocket = require('ws');
 require('dotenv').config();
 const cors = require("cors");
@@ -29,6 +32,7 @@ app.use('/api/community', communityRouter);
 app.use('/api/chat', messageRouter);
 app.use('/api/poll', pollRouter);
 app.use('/api/post', postRouter);
+app.use('/api/notification',notificationRouter);
 
 // Start HTTP server
 const server = app.listen(PORT, () => {

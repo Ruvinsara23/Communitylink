@@ -57,7 +57,7 @@ export default function ChatInterface() {
   useEffect(() => {
     async function fetchGroups(communityId) {
       try {
-        const response = await fetch(`http://localhost:8000/api/chat/${communityId}`);
+        const response = await fetch(`http://localhost:8000/api/chat/6798836edab2a02f8899e7ba`);
         if (!response.ok) throw new Error('Failed to fetch groups');
         const data = await response.json();
         setGroups(data.chats);
@@ -76,7 +76,7 @@ export default function ChatInterface() {
 
     async function fetchMessages() {
       try {
-        const response = await fetch(`http://localhost:8000/api/chat/messages/678355d4649ed6ac61aa15c0`);
+        const response = await fetch(`http://localhost:8000/api/chat/messages/6798836edab2a02f8899e7ba`);
         console.log(response);
         if (!response.ok) throw new Error('Failed to fetch groups');
         const data = await response.json();

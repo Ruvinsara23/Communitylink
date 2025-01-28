@@ -3,7 +3,7 @@ import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../components/ui/dialog";
 import { Plus, Vote } from "lucide-react";
 import PollCreator from "../components/poll/createPoll";
-import axios from "axios"; 
+import axios from "axios";
 import { useCommunity } from "../context/community.context";
 
 export default function PollingPage() {
@@ -12,17 +12,14 @@ export default function PollingPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const { communityId } = useCommunity();
 
-  const {communityId} = useCommunity();
-
-
-  
   useEffect(() => {
     const fetchPolls = async (communityId) => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:8000/api/poll/community/${communityId}`);
-        setPolls(response.data); 
+        const response = await axios.get(`http://localhost:8000/api/poll/community/6798836edab2a02f8899e7ba`);
+        setPolls(response.data);
         setLoading(false);
       } catch (error) {
         setError("Failed to load polls.", error);
@@ -33,9 +30,13 @@ export default function PollingPage() {
     fetchPolls(communityId);
   }, [communityId]);
 
+
+  const calculatePercentage = (votes, totalVotes) => {
+    return totalVotes > 0 ? Math.round((votes / totalVotes) * 100) : 0;
+  };
+
   return (
     <div className="container mx-auto py-8 px-4">
-     
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-4xl font-bold mb-2">Create A Poll</h1>
@@ -57,7 +58,6 @@ export default function PollingPage() {
         </Dialog>
       </div>
 
-     
       <div className="space-y-6">
         <h2 className="text-2xl font-semibold mb-4">Poll History</h2>
         {loading && <p>Loading polls...</p>}
@@ -80,13 +80,13 @@ export default function PollingPage() {
                   <div key={index} className="space-y-1">
                     <div className="flex justify-between text-sm">
                       <span>{option.text}</span>
-                      <span>{Math.round((option.votes / poll.totalVotes) * 100)}%</span>
+                      <span>{calculatePercentage(option.votes, poll.totalVotes)}%</span>
                     </div>
                     <div className="h-2 rounded-full bg-muted overflow-hidden">
                       <div
                         className="h-full bg-blue-400"
                         style={{
-                          width: `${(option.votes / poll.totalVotes) * 100}%`,
+                          width: `${calculatePercentage(option.votes, poll.totalVotes)}%`,
                         }}
                       />
                     </div>
