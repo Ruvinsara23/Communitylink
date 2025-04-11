@@ -60,7 +60,7 @@ export default function PollCreator() {
         userId:'6797b1599c75bd4a3a6a8ade',
       };
   
-      const notificationResponse = await axios.post("http://localhost:8000/api/notifications/notifications", notificationPayload);
+      const notificationResponse = await axios.post("http://localhost:8000/api/notification/notifications", notificationPayload);
       console.log("Notification sent successfully:", notificationResponse.data);
     } catch (error) {
       console.error("Error creating poll:", error.response?.data || error.message);

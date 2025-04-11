@@ -76,7 +76,7 @@ export default function ChatInterface() {
 
     async function fetchMessages() {
       try {
-        const response = await fetch(`http://localhost:8000/api/chat/messages/6798836edab2a02f8899e7ba`);
+        const response = await fetch(`http://localhost:8000/api/chat/messages/6781ed841b5ea113812ea95d`);
         console.log(response);
         if (!response.ok) throw new Error('Failed to fetch groups');
         const data = await response.json();
@@ -114,8 +114,8 @@ export default function ChatInterface() {
     try {
       const newMessage = {
         content,
-        senderID:currentUser._id,
-        chatID: '678355d4649ed6ac61aa15c0',
+        senderID: '6797b1599c75bd4a3a6a8ade',
+        chatID: '6781ed841b5ea113812ea95d',
         type: 'sendMessage',
       };
 

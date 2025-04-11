@@ -2,12 +2,12 @@ const Message = require('../../models/message/message.model');
 const Chat = require('../../models/chat/chat.model'); 
 
 // Create a new message
-// message.controller.js
+
 exports.createMessage = async (req, res) => {
     try {
       const { chatID, senderID, content } = req.body;
   
-      // Validate required fields
+   
       if (!chatID || !senderID || !content) {
         return res.status(400).json({ 
           success: false, 

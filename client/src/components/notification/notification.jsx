@@ -11,7 +11,7 @@ export default function Notifications() {
 
   useEffect(() => {
     
-    axios.get(`http://localhost:8000/api/notifications/6797b1599c75bd4a3a6a8ade`)
+    axios.get(`http://localhost:8000/api/notification/notifications /6797b1599c75bd4a3a6a8ade`)
       .then((response) => {
         setNotifications(response.data.notifications);
         setLoading(false);

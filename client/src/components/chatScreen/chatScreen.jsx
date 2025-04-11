@@ -28,7 +28,7 @@ export function ChatScreen({ group, messages, handleSendMessage }) {
             )}
             <div className={`flex ${message.senderID.name === 'Pansilu' ? 'justify-end' : 'justify-start'} mb-3`}>
               <div className={`max-w-md ${message.senderID.name === 'You' ? 'text-right' : 'text-left'}`}>
-                <p className="font-semibold">{message.senderID.name || 'unknown sender'}</p>
+                <p className="font-semibold">{message.senderID.name || 'Demo User'}</p>
                 <div
                   className={`p-3 rounded-xl ${
                     message.senderID.name === 'Pansilu'
