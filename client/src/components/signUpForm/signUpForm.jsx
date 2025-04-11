@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useNavigate } from 'react-router'
 // import GoogleSignInButton from '../googleSignInButton/googleSignInButton'
 
 
@@ -19,6 +20,7 @@ const SignUpForm = () => {
     const [formField,setFormField]=useState(defaultFormField)
     const {displayName,email,password,confirmPassword}=formField
     const [passwordError, setPasswordError] = useState("")
+    const navigate = useNavigate();
 
     const resetFormFeild=()=>setFormField(defaultFormField)
 
@@ -47,7 +49,8 @@ const SignUpForm = () => {
             })
             if(response.status===200){
                 console.log("Successfully added user from frontend", response.data)
-                resetFormFeild()
+                resetFormFeild();
+                navigate('/create-community');
             }
 
         }catch(error){

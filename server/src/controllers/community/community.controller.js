@@ -17,7 +17,7 @@ exports.createCommunity=async(req,res)=>{
 
     res.status(200).json({
         message:"community register sucessfully",
-        slug:Community.slug,
+        community: newCommunity,
     })
 
 
@@ -64,11 +64,17 @@ exports.getCommunityBySlug=async(req,res)=>{
     console.log('Received slug:', slug);
     try{
         const community= await Community.findOne({slug:slug})
-        // .populate('members', 'name email')
-        // .populate('admins', 'name email')
-        // // .populate('post')
-        // .populate('event')
-        // .populate('polls')
+        .populate('members', 'name email')
+        .populate('admins', 'name email')
+        .populate({
+          path: 'posts',
+          populate: {
+              path: 'userId',
+              select: 'name email profilePicture'
+          }
+      })
+        .populate('events')
+        .populate('polls')
 
       
         if (!community) {
@@ -87,12 +93,11 @@ exports.getCommunityBySlug=async(req,res)=>{
 }
 
 exports.updateCommiunity=async(req,res)=>{
-  const {id,name,description,bannerimage}=req.body
+  const {id,name,description}=req.body
   try {
     const updatedCommunity= await Community.findByIdAndUpdate({_id:id},{
         name:name,
-        description:description,
-        bannerimage:bannerimage 
+        description:description, 
     },{new:true})
 
     if(!updatedCommunity){
@@ -176,30 +181,36 @@ exports.addMember = async (req, res) => {
   
   exports.uploadCommunityImages = async (req, res) => {
     try {
-        const { communityId } = req.params;
-        const community = await Community.findById(communityId);
-
-        if (!community) {
-            return res.status(404).json({ error: "Community not found" });
-        }
-
-        const communityImage = req.files?.communityImage?.[0]?.buffer.toString("base64") || community.communityImage;
-        const bannerImage = req.files?.bannerImage?.[0]?.buffer.toString("base64") || community.bannerImage;
-
-        community.communityImage = communityImage;
-        community.bannerImage = bannerImage;
-
-        await community.save();
-
-        res.status(200).json({
-            message: "Images updated successfully",
-            communityImage,
-            bannerImage,
-        });
+      const { communityId } = req.params;
+      const community = await Community.findById(communityId);
+  
+      if (!community) {
+        return res.status(404).json({ error: "Community not found" });
+      }
+  
+      // Get updated images (fallback to current if not provided)
+      const communityImage =
+        req.files?.communityImage?.[0]?.buffer.toString("base64") ||
+        community.communityImage;
+      const bannerImage =
+        req.files?.bannerImage?.[0]?.buffer.toString("base64") ||
+        community.bannerImage;
+  
+      // Save updated images
+      community.communityImage = communityImage;
+      community.bannerImage = bannerImage;
+  
+      await community.save();
+  
+      res.status(200).json({
+        message: "Images updated successfully",
+        communityImage,
+        bannerImage,
+      });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Failed to update community images" });
+      console.error(error);
+      res.status(500).json({ error: "Failed to update community images" });
     }
-};
+  };
 
 

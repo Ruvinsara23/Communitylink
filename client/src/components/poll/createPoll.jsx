@@ -37,12 +37,12 @@ export default function PollCreator() {
     // Prepare the data
     const pollData = {
       title,
-      options: options.map((text) => ({ text })), // Format options for the backend
-      communityId: "6780b95300ff81739896bb37", // Replace this with the actual community ID
+      options: options.map((text) => ({ text })), 
+      communityId: "6798836edab2a02f8899e7ba", 
     };
 
     try {
-      // Send the data to the backend using Axios
+    
       const response = await axios.post("http://localhost:8000/api/poll/create", pollData, {
         headers: {
           "Content-Type": "application/json",
@@ -53,6 +53,15 @@ export default function PollCreator() {
         console.log("Poll created successfully:", response.data);
         setShowSuccessDialog(true);
       }
+
+      const notificationPayload = {
+        title: `New Event: ${title}`,
+        message: `Don't miss the upcoming event: ${title}. It's scheduled for ${startDateTime}.`,
+        userId:'6797b1599c75bd4a3a6a8ade',
+      };
+  
+      const notificationResponse = await axios.post("http://localhost:8000/api/notification/notifications", notificationPayload);
+      console.log("Notification sent successfully:", notificationResponse.data);
     } catch (error) {
       console.error("Error creating poll:", error.response?.data || error.message);
     }
@@ -95,7 +104,7 @@ export default function PollCreator() {
               )}
             </div>
           ))}
-          <Button type="button" variant="outline" onClick={addOption}>
+          <Button type="button"  variant="outline" onClick={addOption}>
             Add option
           </Button>
         </div>
@@ -112,7 +121,7 @@ export default function PollCreator() {
           </div>
         </div>
 
-        <Button type="submit" className="w-full">
+        <Button type="submit"  className="w-full bg-blue-600">
           Create poll
         </Button>
       </form>

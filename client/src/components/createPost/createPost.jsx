@@ -1,15 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ImagePlus, Send } from 'lucide-react';
 import profileImage from '../../assets/profile.jpeg';
+import { useCommunity } from '../../context/community.context';
+import { UserContext } from '../../context/user.context';
 
-const CreatePost = () => {
+const CreatePost = ({communityId} ) => {
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const fileInputRef = useRef(null);
 
   // Clear image preview on unmount to prevent memory leaks
   useEffect(() => {
@@ -34,6 +37,11 @@ const CreatePost = () => {
     }
   };
 
+  // Function to handle image click
+  const handleImageClick = () => {
+    fileInputRef.current.click(); // Trigger file input click
+  };
+
   // Handle the post submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,8 +55,8 @@ const CreatePost = () => {
     // Prepare the data as a plain JSON object
     const postData = {
       content: content,
-      userId: '674b8fa06060947df883f105', // Replace with logged-in user's ID
-      communityId: '6780b95300ff81739896bb37', // Replace with the current community ID
+      userId: '6797b1599c75bd4a3a6a8ade', // Replace with logged-in user's ID
+      communityId:'6798836edab2a02f8899e7ba' , // Replace with the current community ID
       image: image ? image : null, // Send Base64 encoded image
     };
 
@@ -83,7 +91,7 @@ const CreatePost = () => {
           height={40}
           className="rounded-full mr-3"
         />
-        <span className="font-semibold">John Doe</span>
+        <span className="font-semibold">Demo User</span>
       </div>
       <Textarea
         value={content}
@@ -106,16 +114,19 @@ const CreatePost = () => {
         <div>
           <input
             type="file"
-            id="image-upload"
+            ref={fileInputRef}
             className="hidden"
             accept="image/*"
             onChange={handleImageUpload}
           />
-          <label htmlFor="image-upload" className="cursor-pointer">
-            <Button type="button" variant="outline" size="icon">
-              <ImagePlus className="h-4 w-4" />
-            </Button>
-          </label>
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            onClick={handleImageClick}
+          >
+            <ImagePlus className="h-4 w-4" />
+          </Button>
           {image && <span className="ml-2 text-sm text-gray-500">{image.name}</span>}
         </div>
 

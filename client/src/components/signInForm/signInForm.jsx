@@ -7,7 +7,8 @@ import GoogleSignInButton from '../googleSignInButton/googleSignInButton'
 import {signInWithEmailAndPassword } from 'firebase/auth'
 import {auth} from '../../utils/config/firebase.js'
 import { useNavigate } from 'react-router'
-// import { UserContext } from '../../context/user.context.jsx'
+import { useUser } from '../../context/user.context.jsx'
+import axios from 'axios'
 
 
 
@@ -22,9 +23,20 @@ const SignInForm = () => {
     const {email,password}=formField;
     const [passwordError, setPasswordError] = useState("");
     const navigate=useNavigate();
-    // const {setCurrentUser}=useContext(UserContext);
+    const {currentUser,setCurrentUser}=useUser();
 
     const resetFormFeild=()=>setFormField(defaultFormField)
+
+    const fetchUser = async (firebaseUID) => {
+      try {
+          const response = await axios.get(`http://localhost:8000/api/auth/user/${firebaseUID}`);
+          setCurrentUser(response.data);
+          
+      } catch (error) {
+          console.error('Error fetching user:', error);
+      }
+  };
+
 
 
     const handleChange=(event)=>{
@@ -44,6 +56,7 @@ const SignInForm = () => {
 
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const userData = await userCredential.user
+        const firebaseUID = userData.uid;
         // setCurrentUser(userData);
         console.log("this is user",userData)
             if(!userCredential){
@@ -52,8 +65,11 @@ const SignInForm = () => {
             }else{
                 console.log("Login request 200", userCredential.data)
                 resetFormFeild()
-                navigate('/create-community');
+                fetchUser(firebaseUID);
+                navigate('/');
                 console.log("navgate successfully");
+                
+             
 
             }
 

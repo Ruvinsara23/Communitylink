@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import CommunitySetup from '../../assets/communitysetup.jpg'
+import { useCommunity } from '../../context/community.context'
 import axios from 'axios'
 import '../../App.css'
 
@@ -21,6 +22,7 @@ const  CreateCommunityForm = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const {name,description }=formField;
   const [isFocused, setIsFocused] = useState(false);
+  const { createdCommunities, setCreatedCommunities } = useCommunity();
   const navigate = useNavigate();
 
 
@@ -45,9 +47,11 @@ try{
     })
 
      if(response.status===200){
+      const { slug } = response.data.community;
+      console.log("slug",slug);
       resetFormFeild();
       setFormSubmitted(true);
-      navigate('/setup-community');
+      navigate(`/setup-community`, { state: {slug} });
      }
      console.log("community created successfully",response);
      

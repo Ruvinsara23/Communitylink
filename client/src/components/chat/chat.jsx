@@ -30,9 +30,8 @@ const Chat = () => {
 
   return (
     <div>
-      {/* ...existing code... */}
       <MessageInput onSendMessage={handleSendMessage} />
-      {/* ...existing code... */}
+      
     </div>
   );
 };

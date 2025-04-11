@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCommunity } from "../../context/community.context";
 import {
   ChevronDown,
@@ -13,9 +13,11 @@ import {
   ScrollText,
   Sprout,
 } from "lucide-react";
+import { useUser } from "../../context/user.context";
 
 export function DashboardNav() {
-  const { createdCommunities, adminCommunities, memberCommunities } = useCommunity();
+  const {fetchCommunitiesByUser, createdCommunities, adminCommunities, memberCommunities } = useCommunity();
+  const { currentUser } = useUser();
 
   const [isCreatedOpen, setIsCreatedOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
@@ -53,8 +55,8 @@ export function DashboardNav() {
       title: "ENGAGE",
       items: [
         {
-          title: "Challenges",
-          href: "/challenges",
+          title: "chat",
+          href: "/chat",
           icon: Trophy,
         },
         {
@@ -67,14 +69,21 @@ export function DashboardNav() {
           href: "/events",
           icon: Calendar,
         },
-        {
-          title: "Feed",
-          href: "/feed",
-          icon: ScrollText,
-        },
+        // {
+        //   title: "Feed",
+        //   href: "/feed",
+        //   icon: ScrollText,
+        // },
       ],
     },
   ];
+
+  useEffect(() => {
+    if (currentUser) {
+      fetchCommunitiesByUser(currentUser); // Fetch the communities for the current user
+    }
+  }, [currentUser]);
+ 
 
   return (
     <>
@@ -85,7 +94,7 @@ export function DashboardNav() {
           <div className="flex h-14 items-center border-b px-4">
             <Link className="flex items-center gap-2 font-semibold" to="/">
               <span className="h-6 w-6 rounded-full bg-primary" />
-              Dollpenguin
+              Home
             </Link>
           </div>
 

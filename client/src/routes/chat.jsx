@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext } from 'react';
 import { ChatScreen } from '../components/chatScreen/chatScreen';
 import { Sidebar } from '../components/sidebar/sidebar';
 import axios from 'axios';
+import { useCommunity } from '../context/community.context';
+import { useUser } from '../context/user.context';
+
 
 
 export default function ChatInterface() {
@@ -11,11 +14,17 @@ export default function ChatInterface() {
   const [refreshGroups, setRefreshGroups] = useState(false);
   const [socket, setSocket] = useState(null);
 
- 
+ const {
+    communityId
+ } = useCommunity();
+
+ const {
+    currentUser
+ }=useUser();
 
   useEffect(() => {
-    //websocket connection
-    const ws = new WebSocket('ws://localhost:8000');//backend url ek dapan
+    
+    const ws = new WebSocket('ws://localhost:8000');
     setSocket(ws);
 
     ws.onopen = () => {
@@ -46,9 +55,9 @@ export default function ChatInterface() {
 
 
   useEffect(() => {
-    async function fetchGroups() {
+    async function fetchGroups(communityId) {
       try {
-        const response = await fetch('http://localhost:8000/api/chat/6780b95300ff81739896bb37');
+        const response = await fetch(`http://localhost:8000/api/chat/6798836edab2a02f8899e7ba`);
         if (!response.ok) throw new Error('Failed to fetch groups');
         const data = await response.json();
         setGroups(data.chats);
@@ -58,16 +67,16 @@ export default function ChatInterface() {
       }
     }
 
-    fetchGroups();
-  }, [refreshGroups]);
+    fetchGroups(communityId);
+  }, [refreshGroups,communityId]);
 
 
   useEffect(() => {
     if (!selectedGroup) return;
-//backend url ek dapan messages collection ekt adala
+
     async function fetchMessages() {
       try {
-        const response = await fetch(`http://localhost:8000/api/chat/messages/678355d4649ed6ac61aa15c0`);
+        const response = await fetch(`http://localhost:8000/api/chat/messages/6781ed841b5ea113812ea95d`);
         console.log(response);
         if (!response.ok) throw new Error('Failed to fetch groups');
         const data = await response.json();
@@ -105,8 +114,8 @@ export default function ChatInterface() {
     try {
       const newMessage = {
         content,
-        senderID: '674bf3a07e5eb5e5968c12db',//database details
-        chatID: '678355d4649ed6ac61aa15c0',//database details
+        senderID: '6797b1599c75bd4a3a6a8ade',
+        chatID: '6781ed841b5ea113812ea95d',
         type: 'sendMessage',
       };
 
@@ -158,7 +167,7 @@ export default function ChatInterface() {
 
   return (
     <div className="flex h-screen">
-      <Sidebar groups={groups} onSelectGroup={setSelectedGroup} onCreateGroup={handleCreateGroup} />
+      <Sidebar groups={groups} setSelectedGroup={setSelectedGroup} onCreateGroup={handleCreateGroup} />
       <ChatScreen group={selectedGroup} messages={messages} handleSendMessage={handleSendMessage} />
     </div>
   );

@@ -13,15 +13,15 @@ const PostList = ({ posts, onLike, onComment, onShare }) => {
        
             <div className="flex items-center mb-4">
               <img
-                src={post.authorImage}
+                src={post.userId.profilePicture}
                 alt={post.author}
                 width={40}
                 height={40}
                 className="rounded-full mr-3"
               />
               <div>
-                <h3 className="font-semibold">{post.author}</h3>
-                <p className="text-sm text-gray-500">{post.date}</p>
+                <h3 className="font-semibold">{post.userId.name}</h3>
+                <p className="text-sm text-gray-500">{post.createdAt}</p>
               </div>
             </div>
   

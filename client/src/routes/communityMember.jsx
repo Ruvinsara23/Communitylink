@@ -3,7 +3,7 @@ import { MembersTable } from "../components/communityMembers/membesTable"
 import { MembersTabs } from "../components/communityMembers/memberstTabs"
 
 
-export default function MembersPage() {
+export default function MembePagrse() {
   return (
     
       <div className="flex-1 space-y-8 p-8 pt-6">

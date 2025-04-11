@@ -112,10 +112,17 @@ exports.loginUser = async (req, res) => {
       
     }
 
-    
-  
-
-  
-
-
   }
+
+  exports.getUserByFirebaseUID = async (req, res) => {
+    try {
+        const user = await User.findOne({ firebaseUID: req.params.firebaseUID });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json(user);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+};

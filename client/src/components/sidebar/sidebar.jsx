@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-export function Sidebar({ groups = [], onSelectGroup, onCreateGroup }) {
+export function Sidebar({ groups = [], onCreateGroup, setSelectedGroup }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [newGroupName, setNewGroupName] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -60,7 +60,7 @@ export function Sidebar({ groups = [], onSelectGroup, onCreateGroup }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          communityID: '6780b95300ff81739896bb37', 
+          communityID: '6798836edab2a02f8899e7ba', 
           isGroupChat: true, 
           groupName: newGroupName.trim()
         }),
@@ -94,6 +94,12 @@ export function Sidebar({ groups = [], onSelectGroup, onCreateGroup }) {
       alert('Failed to create group. Please try again.');
     } finally {
       setIsCreating(false);
+    }
+  };
+
+  const onSelectGroup = (group) => {
+    if (setSelectedGroup) {
+      setSelectedGroup(group);
     }
   };
 
