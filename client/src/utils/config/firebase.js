@@ -5,13 +5,13 @@ import { getFirestore } from "firebase/firestore";
 
 
 const firebaseConfig = {
-  apiKey:  import.meta.env.VITE_FIREBASEAPI,
-  authDomain: "communitylink-176f1.firebaseapp.com",
-  projectId: "communitylink-176f1",
-  storageBucket: "communitylink-176f1.firebasestorage.app",
-  messagingSenderId: "938894552751",
-  appId: "1:938894552751:web:5b9c087dd873859e17ae5a",
-  measurementId: "G-602FR6E74J"
+  apiKey:  "AIzaSyCkSBqj4pn2f0bP4Jfyg5RRQjZmarg9ocU",
+  authDomain: "communitylink-ae115.firebaseapp.com",
+  projectId: "communitylink-ae115",
+  storageBucket: "communitylink-ae115.firebasestorage.app",
+  messagingSenderId: "721649901900",
+  appId: "1:721649901900:web:fc9452faf8debc1231efe9",
+  measurementId: "G-E8EZYHNKZP"
 };
 
 const app = initializeApp(firebaseConfig);
